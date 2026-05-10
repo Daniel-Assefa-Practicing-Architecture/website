@@ -12,7 +12,7 @@ const SocialProof = ({ images, id, hasBackground = false }: SocialProofProps) =>
               <Image
                 src={src}
                 alt={alt}
-                className="h-auto w-12 opacity-50 contrast-50 grayscale duration-75 hover:opacity-100 hover:contrast-100 hover:grayscale-0 md:w-16"
+                className="w-12 h-12 opacity-50 contrast-50 grayscale duration-75 hover:opacity-100 hover:contrast-100 hover:grayscale-0 md:w-16 md:h-16"
                 object-fit="contain"
                 width={64}
                 height={64}

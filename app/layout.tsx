@@ -1,43 +1,38 @@
-import { Metadata } from 'next';
-
-import { SITE } from '~/config.js';
-
-import Providers from '~/components/atoms/Providers';
-import Header from '~/components/widgets/Header';
-import Announcement from '~/components/widgets/Announcement';
-import Footer2 from '~/components/widgets/Footer2';
-
-import { Inter as CustomFont } from 'next/font/google';
 import '~/assets/styles/base.css';
 
-const customFont = CustomFont({ subsets: ['latin'], variable: '--font-custom' });
+import { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import Script from 'next/script';
 
-export interface LayoutProps {
-  children: React.ReactNode;
+import { THEME_STORAGE_KEY } from '~/constants/theme';
+import { defaultLocale } from '~/i18n/routing';
+
+/** Mirrors `readPreferredTheme` in Providers — avoids FOUC without ThemeProvider injecting `<script>` in client trees (React 19). */
+function themeBootstrapScript(storageKey: string) {
+  return `!function(){try{var k=${JSON.stringify(storageKey)},v=localStorage.getItem(k),d=v==="dark"||(v!=="light"&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.classList.toggle("dark",d);}catch(e){}}();`;
 }
 
+const inter = Inter({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
-  title: {
-    template: `%s — ${SITE.name}`,
-    default: SITE.title,
-  },
-  description: SITE.description,
+  title: 'TailNext',
+  description: 'Free Tailwind CSS Next.js Template',
 };
 
-export default function RootLayout({ children }: LayoutProps) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`motion-safe:scroll-smooth 2xl:text-[24px] ${customFont.variable} font-sans`}>
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
-      <body className="tracking-tight antialiased text-gray-900 dark:text-slate-300 dark:bg-slate-900">
-        <Providers>
-          <Announcement />
-          <Header />
-          <main>{children}</main>
-          <Footer2 />
-        </Providers>
+    <html lang={defaultLocale} suppressHydrationWarning>
+      <body className={`antialiased ${inter.variable}`} suppressHydrationWarning>
+        <Script
+          id="theme-bootstrap"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeBootstrapScript(THEME_STORAGE_KEY) }}
+        />
+        {children}
       </body>
     </html>
   );

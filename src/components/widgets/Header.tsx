@@ -4,15 +4,18 @@ import { useRef, useState } from 'react';
 import { IconRss } from '@tabler/icons-react';
 import { useOnClickOutside } from '~/hooks/useOnClickOutside';
 import ToggleDarkMode from '~/components/atoms/ToggleDarkMode';
+import LanguageSelector from '~/components/atoms/LanguageSelector';
 import Link from 'next/link';
 import Logo from '~/components/atoms/Logo';
 import ToggleMenu from '../atoms/ToggleMenu';
 import { headerData } from '~/shared/data/global.data';
 import CTA from '../common/CTA';
 import { CallToActionType } from '~/shared/types';
+import { useTranslations } from 'next-intl';
 
 const Header = () => {
-  const { links, actions, isSticky, showToggleTheme, showRssFeed, position } = headerData;
+  const t = useTranslations();
+  const { links, actions, isSticky, showToggleTheme, showRssFeed, showLanguageSelector, position } = headerData;
 
   const ref = useRef(null);
 
@@ -79,7 +82,8 @@ const Header = () => {
           >
             <Logo />
           </Link>
-          <div className="flex items-center md:hidden">
+          <div className="flex items-center gap-1 md:hidden">
+            {showLanguageSelector && <LanguageSelector />}
             <ToggleMenu handleToggleMenuOnClick={handleToggleMenuOnClick} isToggleMenuOpen={isToggleMenuOpen} />
           </div>
         </div>
@@ -102,7 +106,7 @@ const Header = () => {
                         className="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
                         onClick={() => handleDropdownOnClick(index)}
                       >
-                        {label}{' '}
+                        {t(label || '')} {' '}
                         {Icon && (
                           <Icon
                             className={`${
@@ -114,7 +118,7 @@ const Header = () => {
                       <ul
                         className={`${
                           isDropdownOpen[index] ? 'block' : 'md:hidden'
-                        } rounded pl-4 font-medium drop-shadow-xl md:absolute md:min-w-[200px] md:bg-white/90 md:pl-0 md:backdrop-blur-md dark:md:bg-slate-900/90 md:border md:border-gray-200 md:dark:border-slate-700`}
+                        } z-[60] rounded-lg border border-gray-200 bg-white py-1 pl-4 font-medium shadow-xl dark:border-slate-600 dark:bg-slate-900 md:absolute md:min-w-[220px] md:pl-0 md:shadow-xl`}
                       >
                         {links.map(({ label: label2, href: href2 }, index2) => (
                           <li key={`item-link-${index2}`}>
@@ -125,7 +129,7 @@ const Header = () => {
                                 isToggleMenuOpen ? handleToggleMenuOnClick() : handleCloseDropdownOnClick(index)
                               }
                             >
-                              {label2}
+                              {t(label2 || '')}
                             </Link>
                           </li>
                         ))}
@@ -137,7 +141,7 @@ const Header = () => {
                       href={href as string}
                       onClick={() => (isToggleMenuOpen ? handleToggleMenuOnClick() : handleDropdownOnClick(index))}
                     >
-                      {label}
+                      {t(label || '')}
                     </Link>
                   )}
                 </li>
@@ -151,6 +155,11 @@ const Header = () => {
         >
           <div className="flex w-full items-center justify-between md:w-auto">
             {showToggleTheme && <ToggleDarkMode />}
+            {showLanguageSelector && (
+              <span className="hidden md:inline">
+                <LanguageSelector />
+              </span>
+            )}
             {showRssFeed && (
               <Link
                 className="text-muted inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"

@@ -2,19 +2,17 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ['./app/**/*.{js,ts,jsx,tsx}', './src/**/*.{js,ts,jsx,tsx,md,mdx}'],
   theme: {
     extend: {
-      colors: {
-        primary: colors.blue,
-        secondary: colors.blue,
-      },
       fontFamily: {
-        sans: ['var(--font-custom)', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
+      },
+      colors: {
+        secondary: colors.blue,
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
   darkMode: 'class',
 };

@@ -1,4 +1,4 @@
-module.exports.SITE = {
+export const SITE = {
   name: 'TailNext',
 
   origin: 'https://tailnext.vercel.app',

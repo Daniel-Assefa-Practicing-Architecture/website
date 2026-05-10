@@ -37,7 +37,7 @@ const Comparison = ({ header, columns, id, hasBackground = false }: ComparisonPr
                 ) : index !== 0 ? (
                   <p className="mt-2">{title2}</p>
                 ) : (
-                  <h4 className="mt-2 text-lg">{title2}</h4>
+                  <h4 className="mt-2 text-lg text-gray-900 dark:text-slate-100">{title2}</h4>
                 )}
               </div>
             ))}

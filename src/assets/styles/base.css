@@ -1,8 +1,74 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+/* Tailwind v4 defaults `dark:` to prefers-color-scheme — override so manual `.dark` class works */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* Define your primary color scale here */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb; /* This fixes your error! */
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+  --color-primary-950: #172554;
+
+  /* Base primary (Tailwind utilities like `text-primary` / `border-primary`) */
+  --color-primary: var(--color-primary-600);
+}
+
+/*
+ * Typography plugin relies on `--tw-prose-*` vars. Under Tailwind v4 + `@theme`, those
+ * variables are sometimes missing from `.prose`, which makes prose `color:` invalid and
+ * body/links render as black. This class restores the palette using your `@theme` primary.
+ */
 @layer components {
+  .prose-primary-theme {
+    --tw-prose-body: #374151;
+    --tw-prose-headings: var(--color-primary-950);
+    --tw-prose-lead: #4b5563;
+    --tw-prose-links: var(--color-primary-600);
+    --tw-prose-bold: #1f2937;
+    --tw-prose-counters: #6b7280;
+    --tw-prose-bullets: var(--color-primary-400);
+    --tw-prose-hr: #e5e7eb;
+    --tw-prose-quotes: var(--color-primary-800);
+    --tw-prose-quote-borders: var(--color-primary-200);
+    --tw-prose-captions: #6b7280;
+    --tw-prose-kbd: #374151;
+    --tw-prose-kbd-shadows: rgb(55 65 81 / 0.1);
+    --tw-prose-code: #1f2937;
+    --tw-prose-pre-code: #e5e7eb;
+    --tw-prose-pre-bg: #1f2937;
+    --tw-prose-th-borders: #d1d5db;
+    --tw-prose-td-borders: #e5e7eb;
+
+    --tw-prose-invert-body: #d1d5db;
+    --tw-prose-invert-headings: #f1f5f9;
+    --tw-prose-invert-lead: #9ca3af;
+    --tw-prose-invert-links: var(--color-primary-400);
+    --tw-prose-invert-bold: #f9fafb;
+    --tw-prose-invert-counters: #9ca3af;
+    --tw-prose-invert-bullets: var(--color-primary-500);
+    --tw-prose-invert-hr: #4b5563;
+    --tw-prose-invert-quotes: #e5e7eb;
+    --tw-prose-invert-quote-borders: var(--color-primary-700);
+    --tw-prose-invert-captions: #9ca3af;
+    --tw-prose-invert-kbd: #f9fafb;
+    --tw-prose-invert-kbd-shadows: rgb(255 255 255 / 0.1);
+    --tw-prose-invert-code: #f9fafb;
+    --tw-prose-invert-pre-code: #d1d5db;
+    --tw-prose-invert-pre-bg: rgb(0 0 0 / 50%);
+    --tw-prose-invert-th-borders: #4b5563;
+    --tw-prose-invert-td-borders: #374151;
+  }
+
   .btn {
     @apply inline-flex items-center justify-center rounded-md border border-gray-400 hover:border-gray-600 dark:border-slate-500 dark:hover:border-slate-700 bg-white dark:bg-transparent hover:bg-gray-100 dark:hover:bg-slate-700 text-center text-base text-gray-700 dark:text-slate-300 dark:hover:text-white font-medium leading-snug shadow-md hover:shadow-none transition duration-200 ease-in focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200 py-3 px-6 md:px-8;
   }

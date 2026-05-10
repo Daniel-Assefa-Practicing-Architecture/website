@@ -1,36 +1,37 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useTheme } from 'next-themes';
-import { IconSun, IconMoon } from '@tabler/icons-react';
+import { useEffect, useState } from 'react';
+import { IconMoon, IconSun } from '@tabler/icons-react';
+
+import { useTheme } from '~/components/atoms/Providers';
 
 const ToggleDarkMode = () => {
-  const [mounted, setMounted] = useState<boolean>(false);
-  const { systemTheme, theme, setTheme } = useTheme();
+  const { resolvedTheme, toggleTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  const currentTheme = theme === 'system' ? systemTheme : theme;
+  useEffect(() => setMounted(true), []);
 
-  const handleOnClick = () => setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+  const buttonCls =
+    'inline-block rounded-lg p-2.5 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700 disabled:opacity-40';
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  if (!mounted) {
+    return (
+      <button type="button" className={buttonCls} aria-label="Toggle Dark Mode" disabled>
+        <IconMoon className="h-5 w-5" />
+      </button>
+    );
+  }
+
+  const isDark = resolvedTheme === 'dark';
 
   return (
     <button
-      onClick={handleOnClick}
-      className="inline-block rounded-lg p-2.5 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-      aria-label="Toggle Dark Mode"
+      type="button"
+      onClick={() => toggleTheme()}
+      className={buttonCls}
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
-      {mounted ? (
-        currentTheme === 'dark' ? (
-          <IconMoon className="h-5 w-5" />
-        ) : (
-          <IconSun className="h-5 w-5" />
-        )
-      ) : (
-        <div className="h-5 w-5"></div>
-      )}
+      {isDark ? <IconSun className="h-5 w-5" /> : <IconMoon className="h-5 w-5" />}
     </button>
   );
 };

@@ -1,7 +1,9 @@
-const SITE = require('./src/config.js').SITE;
+import { SITE } from './src/config.js';
 
 /** @type {import('next-sitemap').IConfig} */
-module.exports = {
+const config = {
   siteUrl: `${SITE.origin}${SITE.basePathname}`,
   generateRobotsTxt: true,
 };
+
+export default config;

@@ -38,7 +38,9 @@ const ItemTestimonial = ({
               )}
 
               <div className={twMerge('flex flex-col justify-center', nameJobClass)}>
-                {name && <h3 className={twMerge('font-semibold', nameClass)}>{name}</h3>}
+                {name && (
+                  <h3 className={twMerge('font-semibold text-gray-900 dark:text-slate-50', nameClass)}>{name}</h3>
+                )}
                 {job && <span className={twMerge('dark:text-slate-400', jobClass)}>{job}</span>}
               </div>
             </div>

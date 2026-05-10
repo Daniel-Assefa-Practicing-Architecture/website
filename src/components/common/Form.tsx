@@ -53,8 +53,14 @@ const Form = ({
 
   return (
     <form id="contactForm" className={twMerge('', containerClass)}>
-      {title && <h2 className={`${description ? 'mb-2' : 'mb-4'} text-2xl font-bold`}>{title}</h2>}
-      {description && <p className="mb-4">{description}</p>}
+      {title && (
+        <h2
+          className={`${description ? 'mb-2' : 'mb-4'} text-2xl font-bold text-gray-900 dark:text-slate-50`}
+        >
+          {title}
+        </h2>
+      )}
+      {description && <p className="mb-4 text-gray-600 dark:text-slate-400">{description}</p>}
       <div className="mb-6">
         {/* Inputs */}
         <div className="mx-0 mb-1 sm:mb-4">

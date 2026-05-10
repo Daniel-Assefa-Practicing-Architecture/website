@@ -28,7 +28,7 @@ const Pricing = ({ header, prices, id, hasBackground = false }: PricingProps) =>
                     )}
                     <div className="px-2 py-0">
                       {title && (
-                        <h3 className="text-center text-xl font-semibold uppercase leading-6 tracking-wider mb-2">
+                        <h3 className="mb-2 text-center text-xl font-semibold uppercase leading-6 tracking-wider text-gray-900 dark:text-slate-50">
                           {title}
                         </h3>
                       )}

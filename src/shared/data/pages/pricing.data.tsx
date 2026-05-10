@@ -3,14 +3,13 @@ import { HeroProps } from '~/shared/types';
 
 // Hero data on Pricing page *******************
 export const heroPricing: HeroProps = {
-  title: 'Plans and Prices',
+  title: 'Pricing.title',
   subtitle: (
     <>
       <span className="hidden md:inline">
-        {`Here, you'll find a clear breakdown of our service plans and their respective features. Whether you're a small
-        business or a large enterprise, we have options tailored to your needs.`}
+        {`Pricing.subtitle`}
       </span>{' '}
-      You can choose the plan that best suits your goals!
+      Pricing.subtitle2
     </>
   ),
   tagline: 'Demo Pricing Page',
@@ -21,90 +20,90 @@ export const pricingPricing: PricingProps = {
   id: 'pricing-on-pricing',
   hasBackground: true,
   header: {
-    title: 'Our plans',
+    title: 'Pricing.ourPlans',
     subtitle: (
       <>
-        Discover our flexible pricing options designed to fit your needs perfectly.{' '}
-        <span className="hidden md:inline">{`No matter the size of your project, we have the right plan for you.`}</span>
+        Pricing.plansSubtitle{' '}
+        <span className="hidden md:inline">{`Pricing.plansSubtitle2`}</span>
       </>
     ),
   },
   prices: [
     {
-      title: 'basic',
-      subtitle: 'Optimal choice for personal use',
-      price: 29,
-      period: 'per month',
+      title: 'Pricing.basic',
+      subtitle: 'Pricing.basicSubtitle',
+      price: 150,
+      period: 'Pricing.perMonth',
       items: [
         {
-          description: 'Access to a selection of professionally designed website templates.',
+          description: 'Design consultation and requirements gathering.',
         },
         {
-          description: 'Email support to assist you with any questions or issues.',
+          description: 'Wireframing and basic UI/UX design concepts.',
         },
         {
-          description: 'Adequate storage space for small to medium-sized websites.',
+          description: 'Up to 5 design revisions and feedback incorporation.',
         },
         {
-          description: 'Core features for a functional online presence, such as SEO tools and contact forms.',
+          description: 'Design files delivery in standard formats.',
         },
       ],
       callToAction: {
         targetBlank: true,
-        text: 'Free 7-day trial',
+        text: 'Pricing.freeTrial',
         href: '/',
       },
       hasRibbon: false,
     },
     {
-      title: 'standard',
-      subtitle: 'Optimal choice for small teams',
-      price: 69,
-      period: 'per month',
+      title: 'Pricing.standard',
+      subtitle: 'Pricing.standardSubtitle',
+      price: 350,
+      period: 'Pricing.perMonth',
       items: [
         {
-          description: 'A larger variety of premium website templates to choose from.',
+          description: 'Comprehensive design consultation and user research.',
         },
         {
-          description: 'Faster response times and priority customer support.',
+          description: 'Detailed wireframes, mockups, and interactive prototypes.',
         },
         {
-          description: 'More storage space to accommodate growing websites and content.',
+          description: 'Unlimited design revisions and client collaboration.',
         },
         {
-          description: 'Enable e-commerce capabilities to sell products or services online.',
+          description: 'High-fidelity designs with branding integration.',
         },
       ],
       callToAction: {
         targetBlank: true,
-        text: 'Free 15-day trial',
+        text: 'Pricing.free15Trial',
         href: '/',
       },
       hasRibbon: true,
-      ribbonTitle: 'Popular',
+      ribbonTitle: 'Pricing.popular',
     },
     {
-      title: 'premium',
-      subtitle: 'Optimal choice for companies',
-      price: 199,
-      period: 'per month',
+      title: 'Pricing.premium',
+      subtitle: 'Pricing.premiumSubtitle',
+      price: 750,
+      period: 'Pricing.perMonth',
       items: [
         {
-          description: 'Access to exclusive and customizable premium website templates.',
+          description: 'Full-service design package with strategy and planning.',
         },
         {
-          description: 'Round-the-clock customer support for immediate assistance.',
+          description: 'Complete UI/UX design system and component library.',
         },
         {
-          description: 'No limits on storage, ideal for extensive websites and media.',
+          description: 'Advanced prototyping, user testing, and analytics setup.',
         },
         {
-          description: 'Advanced SEO, analytics, and marketing tools for optimal performance and growth.',
+          description: 'Ongoing design support and maintenance services.',
         },
       ],
       callToAction: {
         targetBlank: true,
-        text: 'Free 30-day trial',
+        text: 'Pricing.free30Trial',
         href: '/',
       },
       hasRibbon: false,

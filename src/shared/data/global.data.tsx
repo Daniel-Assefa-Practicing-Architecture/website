@@ -25,45 +25,45 @@ export const announcementData: AnnouncementProps = {
 export const headerData: HeaderProps = {
   links: [
     {
-      label: 'Pages',
+      label: 'Header.pages',
       icon: IconChevronDown,
       links: [
         {
-          label: 'Services',
+          label: 'Header.services',
           href: '/services',
         },
         {
-          label: 'Pricing',
+          label: 'Header.pricing',
           href: '/pricing',
         },
         {
-          label: 'About us',
+          label: 'Header.about',
           href: '/about',
         },
         {
-          label: 'Contact us',
+          label: 'Header.contact',
           href: '/contact',
         },
         {
-          label: 'FAQs',
+          label: 'Header.faqs',
           href: '/faqs',
         },
         {
-          label: 'Terms & Conditions',
+          label: 'Header.terms',
           href: '/terms',
         },
         {
-          label: 'Privacy Policy',
+          label: 'Header.privacy',
           href: '/privacy',
         },
       ],
     },
     {
-      label: 'Blog',
+      label: 'Header.blog',
       href: '/blog',
     },
     {
-      label: 'Contact',
+      label: 'Header.contact',
       href: '/contact',
     },
   ],
@@ -77,6 +77,7 @@ export const headerData: HeaderProps = {
   isSticky: true,
   showToggleTheme: true,
   showRssFeed: false,
+  showLanguageSelector: true,
   position: 'right',
 };
 

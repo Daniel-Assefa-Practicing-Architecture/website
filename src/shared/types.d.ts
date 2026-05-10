@@ -358,5 +358,6 @@ type HeaderProps = {
   isSticky?: boolean;
   showToggleTheme?: boolean;
   showRssFeed?: boolean;
+  showLanguageSelector?: boolean;
   position?: 'center' | 'right' | 'left';
 };

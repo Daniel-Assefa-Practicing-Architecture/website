@@ -1,10 +1,10 @@
 import {
-  IconArrowDown,
   IconArrowsRightLeft,
   IconBrandLinkedin,
   IconBrandTailwind,
   IconBrandTwitter,
   IconBulb,
+  IconChartBar,
   IconCheck,
   IconClock,
   IconComponents,
@@ -14,6 +14,7 @@ import {
   IconMapPin,
   IconPhoneCall,
   IconRocket,
+  IconSearch,
 } from '@tabler/icons-react';
 import {
   CallToActionProps,
@@ -258,32 +259,38 @@ export const stepsHome: StepsProps = {
   isImageDisplayed: true,
   image: {
     src: gasImg,
-    alt: 'Steps image',
+    alt: 'Causal workflow from GitHub data to counterfactual analysis',
   },
   header: {
-    title: 'Sed ac magna sit amet risus tristique interdum.',
+    tagline: 'How it works',
+    title: 'From GitHub data to causal insight',
+    subtitle:
+      'Engineering managers select a project range, connect their delivery history, and move through a guided workflow—from discovering structure in the data to evaluating counterfactuals.',
   },
   items: [
     {
-      title: 'Step 1',
+      title: 'Discovery',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis, mirisus tempus nulla, sed porttitor est nibh at nulla. Praesent placerat enim ut ex tincidunt vehicula. Fusce sit amet dui tellus.',
-      icon: IconArrowDown,
+        'Select a date range across your GitHub projects and upload or sync your CSV history. The platform surfaces data-driven DAGs that reflect how variables in your delivery data relate to one another.',
+      icon: IconSearch,
     },
     {
-      title: 'Step 2',
+      title: 'Estimation',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis, mirisus tempus nulla, sed porttitor est nibh at nulla.',
-      icon: IconArrowDown,
+        'Review the candidate DAGs and pick the one that best describes your domain. Run causal estimation to quantify how changes in one factor propagate through the rest of the system.',
+      icon: IconChartBar,
     },
     {
-      title: 'Step 3',
+      title: 'Evaluation',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis, mirisus tempus nulla, sed porttitor est nibh at nulla.',
-      icon: IconArrowDown,
+        'Validate the chosen model against your data—check fit, stability, and whether the estimated effects are credible for the decisions you need to make.',
+      icon: IconListCheck,
     },
     {
-      title: 'Ready!',
+      title: 'Counterfactual',
+      description:
+        'Explore what-if scenarios: simulate interventions and compare outcomes under different policies or process changes before committing in the real world.',
+      icon: IconArrowsRightLeft,
     },
   ],
 };

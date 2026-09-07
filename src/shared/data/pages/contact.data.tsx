@@ -1,13 +1,19 @@
 import { FeaturesProps, HeroProps } from '~/shared/types';
 import amCopy from '../copy-am.json';
 import { pick } from '../locale';
+import {
+  STUDIO_ADDRESS_AM,
+  STUDIO_ADDRESS_EN,
+  STUDIO_PHONE_DISPLAY,
+  STUDIO_PHONE_TEL,
+} from '../studio';
 
 export function getHeroContact(locale = 'en'): HeroProps {
   return {
     title: pick(locale, 'Find the studio', amCopy.findStudio),
     subtitle: pick(
       locale,
-      'Daniel Assefa Practicing Architecture is based in Addis Ababa, Ethiopia. Reach us by phone or email to begin a project conversation.',
+      'Daniel Assefa Practicing Architecture is based near Bole Michael Church in Addis Ababa, Ethiopia. Reach us by phone or email to begin a project conversation.',
       amCopy.contactHeroSubtitle,
     ),
     tagline: pick(locale, 'Contact', amCopy.contactTag),
@@ -19,14 +25,14 @@ export function getContactDetails(locale = 'en') {
     title: pick(locale, 'Addis Ababa, Ethiopia', amCopy.mapTitle),
     subtitle: pick(
       locale,
-      'Our practice serves clients across Ethiopia with design, supervision, and project leadership.',
+      'Near Bole Michael Church, in front of the ring road. Our practice serves clients across Ethiopia with design, supervision, and project leadership.',
       amCopy.mapSubtitle,
     ),
     visitLabel: pick(locale, 'Visit', amCopy.visit),
-    mapTitle: pick(locale, 'Map of Addis Ababa, Ethiopia', amCopy.mapIframeTitle),
+    mapTitle: pick(locale, 'Map of the studio near Bole Michael Church', amCopy.mapIframeTitle),
     addressLines: [
-      pick(locale, 'Addis Ababa, Ethiopia', amCopy.mapTitle),
-      `${pick(locale, 'Phone', amCopy.phoneLabel)}: +1 (437) 833-2850`,
+      pick(locale, STUDIO_ADDRESS_EN, STUDIO_ADDRESS_AM),
+      `${pick(locale, 'Phone', amCopy.phoneLabel)}: ${STUDIO_PHONE_DISPLAY}`,
       `${pick(locale, 'Email', amCopy.emailLabel)}: danassgebbal12@gmail.com`,
     ],
   };
@@ -56,8 +62,8 @@ export function getFeatures2Contact(locale = 'en'): FeaturesProps {
         title: pick(locale, 'Call', 'ይደውሉ'),
         description: pick(locale, 'Speak with the practice about timelines and scope.', 'ስለ ጊዜ ሰሌዳ እና ስፋት ከልምዱ ጋር ይነጋገሩ።'),
         callToAction: {
-          text: pick(locale, 'Call +1 (437) 833-2850', amCopy.callStudio),
-          href: 'tel:+14378332850',
+          text: pick(locale, `Call ${STUDIO_PHONE_DISPLAY}`, amCopy.callStudio),
+          href: STUDIO_PHONE_TEL,
         },
       },
       {

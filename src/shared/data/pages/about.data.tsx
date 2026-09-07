@@ -24,9 +24,9 @@ import {
 import amCopy from '../copy-am.json';
 import { pick } from '../locale';
 import { mediaUrl } from '../media';
+import { STUDIO_ADDRESS_AM, STUDIO_ADDRESS_EN, STUDIO_MAP_EMBED, STUDIO_PHONE_DISPLAY } from '../studio';
 
-const ADDIS_MAP =
-  'https://www.openstreetmap.org/export/embed.html?bbox=38.68%2C8.95%2C38.82%2C9.08&layer=mapnik&marker=9.03%2C38.75';
+const ADDIS_MAP = STUDIO_MAP_EMBED;
 
 export function getHero2About(locale = 'en'): HeroProps {
   return {
@@ -204,10 +204,10 @@ export function getFaqsAbout(locale = 'en'): FAQsProps {
       tagline: pick(locale, 'FAQs', amCopy.faqsTag),
     },
     items: [
-      { title: pick(locale, 'Where is the studio?', amCopy.faqWhere), description: pick(locale, 'Daniel Assefa Practicing Architecture is based in Addis Ababa, Ethiopia, and works on projects across the country.', amCopy.faqWhereAns) },
+      { title: pick(locale, 'Where is the studio?', amCopy.faqWhere), description: pick(locale, 'Daniel Assefa Practicing Architecture is near Bole Michael Church, in front of the ring road in Addis Ababa, Ethiopia, and works on projects across the country.', amCopy.faqWhereAns) },
       { title: pick(locale, 'What kinds of buildings do you take on?', amCopy.faqTypes), description: pick(locale, 'Housing, churches, schools, hospitals, mixed-use, hotels, and civic buildings, from first sketch through supervision.', amCopy.faqTypesAns) },
       { title: pick(locale, 'Are you a registered practice?', amCopy.faqReg), description: pick(locale, 'Yes. Registered Architect and Professional Member of the Ethiopian Association of Architects, certified by the Ethiopian Engineering Council, and CPD accredited.', amCopy.faqRegAns) },
-      { title: pick(locale, 'How do we start a conversation?', amCopy.faqStart), description: pick(locale, 'Write to danassgebbal12@gmail.com or call +1 (437) 833-2850. A short brief and site notes are enough to begin.', amCopy.faqStartAns) },
+      { title: pick(locale, 'How do we start a conversation?', amCopy.faqStart), description: pick(locale, `Write to danassgebbal12@gmail.com or call ${STUDIO_PHONE_DISPLAY}. A short brief and site notes are enough to begin.`, amCopy.faqStartAns) },
     ],
   };
 }
@@ -218,17 +218,17 @@ export function getContactAbout(locale = 'en'): ContactProps {
     hasBackground: true,
     header: {
       title: pick(locale, 'Visit the practice', amCopy.contactTitle),
-      subtitle: pick(locale, 'Addis Ababa, Ethiopia, open to new commissions.', amCopy.contactSubtitle),
+      subtitle: pick(locale, 'Near Bole Michael Church, Addis Ababa, open to new commissions.', amCopy.contactSubtitle),
       tagline: pick(locale, 'Contact', amCopy.contactTag),
     },
     content: pick(locale, 'Find the studio on the map, or reach us directly by phone or email.', amCopy.contactLead),
     items: [
-      { title: pick(locale, 'Studio', amCopy.studio), description: ['Addis Ababa, Ethiopia'], icon: IconMapPin },
-      { title: pick(locale, 'Contact', amCopy.headerContact), description: ['+1 (437) 833-2850', 'danassgebbal12@gmail.com'], icon: IconPhoneCall },
+      { title: pick(locale, 'Studio', amCopy.studio), description: [pick(locale, STUDIO_ADDRESS_EN, STUDIO_ADDRESS_AM)], icon: IconMapPin },
+      { title: pick(locale, 'Contact', amCopy.headerContact), description: [STUDIO_PHONE_DISPLAY, 'danassgebbal12@gmail.com'], icon: IconPhoneCall },
       { title: pick(locale, 'Hours', amCopy.hours), description: [pick(locale, 'By appointment', amCopy.hoursByAppt), pick(locale, 'Open to new commissions', amCopy.hoursOpen)], icon: IconClock },
     ],
     mapEmbedUrl: ADDIS_MAP,
-    mapTitle: pick(locale, 'Addis Ababa studio location', amCopy.mapTitle),
+    mapTitle: pick(locale, 'Studio near Bole Michael Church', amCopy.mapTitle),
   };
 }
 

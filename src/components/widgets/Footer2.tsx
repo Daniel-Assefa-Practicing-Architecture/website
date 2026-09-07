@@ -14,7 +14,7 @@ const Footer2 = () => {
     },
     {
       title: t('phone'),
-      texts: ['+1 (437) 833-2850'],
+      texts: ['+251 910 202 958'],
     },
     {
       title: t('email'),

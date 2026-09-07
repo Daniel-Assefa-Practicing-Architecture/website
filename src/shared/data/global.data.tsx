@@ -74,14 +74,14 @@ export const footerData: FooterProps = {
     {
       title: 'Studio',
       links: [
-        { label: 'Addis Ababa, Ethiopia', href: '/contact' },
+        { label: 'Near Bole Michael Church, Addis Ababa', href: '/contact' },
         { label: 'Open map', href: '/contact' },
       ],
     },
     {
       title: 'Contact',
       links: [
-        { label: '+1 (437) 833-2850', href: 'tel:+14378332850' },
+        { label: '+251 910 202 958', href: 'tel:+251910202958' },
         { label: 'danassgebbal12@gmail.com', href: 'mailto:danassgebbal12@gmail.com' },
       ],
     },
@@ -105,11 +105,11 @@ export const footerData2: FooterProps = {
   columns: [
     {
       title: 'Studio',
-      texts: ['Addis Ababa, Ethiopia', 'Daniel Assefa Practicing Architecture'],
+      texts: ['Near Bole Michael Church, Addis Ababa', 'Daniel Assefa Practicing Architecture'],
     },
     {
       title: 'Phone',
-      texts: ['+1 (437) 833-2850'],
+      texts: ['+251 910 202 958'],
     },
     {
       title: 'Email',

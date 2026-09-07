@@ -1,24 +1,27 @@
 'use client';
 
+import { STUDIO_MAP_EMBED, STUDIO_MAP_LINK } from '~/shared/data/studio';
+
 type EthiopiaMapProps = {
   title?: string;
   subtitle?: string;
   addressLines?: string[];
   visitLabel?: string;
   mapTitle?: string;
+  mapEmbedUrl?: string;
+  mapLinkUrl?: string;
 };
 
-/** OpenStreetMap embed centered on Addis Ababa, Ethiopia. */
+/** Map embed for the Addis Ababa studio near Bole Michael Church. */
 const EthiopiaMap = ({
   title = 'Studio location',
-  subtitle = 'Daniel Assefa Practicing Architecture, Addis Ababa, Ethiopia',
-  addressLines = ['Addis Ababa, Ethiopia', 'Projects across Ethiopia'],
+  subtitle = 'Near Bole Michael Church, in front of the ring road, Addis Ababa, Ethiopia',
+  addressLines = ['Near Bole Michael Church, in front of the ring road', 'Addis Ababa, Ethiopia'],
   visitLabel = 'Visit',
-  mapTitle = 'Map of Addis Ababa, Ethiopia',
+  mapTitle = 'Map of the studio near Bole Michael Church',
+  mapEmbedUrl = STUDIO_MAP_EMBED,
+  mapLinkUrl = STUDIO_MAP_LINK,
 }: EthiopiaMapProps) => {
-  const mapSrc =
-    'https://www.openstreetmap.org/export/embed.html?bbox=38.68%2C8.95%2C38.82%2C9.08&layer=mapnik&marker=9.03%2C38.75';
-
   return (
     <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 md:py-16">
       <div className="mb-8 max-w-2xl">
@@ -36,7 +39,7 @@ const EthiopiaMap = ({
       <div className="overflow-hidden border border-stone-200 bg-stone-100 shadow-sm dark:border-slate-700 dark:bg-slate-800">
         <iframe
           title={mapTitle}
-          src={mapSrc}
+          src={mapEmbedUrl}
           className="h-[min(70vh,32rem)] w-full border-0"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
@@ -44,7 +47,7 @@ const EthiopiaMap = ({
       </div>
       <p className="mt-3 text-sm text-stone-500 dark:text-slate-500">
         <a
-          href="https://www.openstreetmap.org/?mlat=9.03&mlon=38.75#map=13/9.03/38.75"
+          href={mapLinkUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="underline decoration-accent-500/50 underline-offset-2 hover:text-accent-700"

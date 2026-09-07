@@ -47,5 +47,5 @@ We may update these Terms from time to time. Continued use of the Service after 
 If you have any questions about these Terms and Conditions, contact us:
 
 - By email: [danassgebbal12@gmail.com](mailto:danassgebbal12@gmail.com)
-- By phone: +1 (437) 833-2850
-- Studio: Addis Ababa, Ethiopia
+- By phone: +251 910 202 958
+- Studio: Near Bole Michael Church, in front of the ring road, Addis Ababa, Ethiopia

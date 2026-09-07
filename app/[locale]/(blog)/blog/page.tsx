@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
-
+import { Suspense } from 'react';
 import Image from 'next/image';
-
 import { Link } from '~/i18n/navigation';
 import { findLatestPosts } from '~/utils/posts';
 
@@ -9,11 +8,7 @@ export const metadata: Metadata = {
   title: 'Blog',
 };
 
-export default async function BlogIndexPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+async function BlogBody({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const posts = (await findLatestPosts({ locale, count: 48 })).reverse();
 
@@ -47,5 +42,17 @@ export default async function BlogIndexPage({
         ))}
       </div>
     </section>
+  );
+}
+
+export default function BlogIndexPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  return (
+    <Suspense fallback={<div className="min-h-[40vh]" aria-hidden />}>
+      <BlogBody params={params} />
+    </Suspense>
   );
 }

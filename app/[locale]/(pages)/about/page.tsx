@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-
+import LocalePage from '~/components/common/LocalePage';
 import Contact from '~/components/widgets/Contact';
 import FAQs from '~/components/widgets/FAQs';
 import Features from '~/components/widgets/Features';
@@ -22,19 +22,21 @@ export const metadata: Metadata = {
   title: 'About us',
 };
 
-export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-
+export default function Page({ params }: { params: Promise<{ locale: string }> }) {
   return (
-    <>
-      <Hero2 {...getHero2About(locale)} />
-      <Stats {...getStatsAbout(locale)} />
-      <Features4 {...getFeaturesFourAbout(locale)} />
-      <Features4 {...getFeaturesFourAboutTwo(locale)} />
-      <Steps {...getStepsAbout(locale)} />
-      <Features {...getFeaturesAbout(locale)} />
-      <FAQs {...getFaqsAbout(locale)} />
-      <Contact {...getContactAbout(locale)} />
-    </>
+    <LocalePage params={params}>
+      {(locale) => (
+        <>
+          <Hero2 {...getHero2About(locale)} />
+          <Stats {...getStatsAbout(locale)} />
+          <Features4 {...getFeaturesFourAbout(locale)} />
+          <Features4 {...getFeaturesFourAboutTwo(locale)} />
+          <Steps {...getStepsAbout(locale)} />
+          <Features {...getFeaturesAbout(locale)} />
+          <FAQs {...getFaqsAbout(locale)} />
+          <Contact {...getContactAbout(locale)} />
+        </>
+      )}
+    </LocalePage>
   );
 }

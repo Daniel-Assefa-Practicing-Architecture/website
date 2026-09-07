@@ -17,11 +17,11 @@ const SocialProof = ({ images, id, hasBackground = false }: SocialProofProps) =>
             <Image
               src={src}
               alt={alt}
-              className="h-full max-w-[11rem] object-contain transition duration-150 hover:scale-105 md:max-w-[14rem]"
+              className="max-h-full max-w-[11rem] object-contain transition duration-150 hover:scale-105 md:max-w-[14rem]"
               width={224}
               height={96}
               sizes="(max-width: 768px) 176px, 224px"
-              style={{ width: 'auto', height: '100%' }}
+              style={{ width: 'auto', height: 'auto' }}
               loading="lazy"
               decoding="async"
             />

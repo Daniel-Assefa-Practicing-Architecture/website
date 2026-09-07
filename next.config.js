@@ -16,6 +16,7 @@ const nextConfig = {
   // /_next/image request storms that CrowdSec often treats as flooding.
   images: {
     unoptimized: true,
+    qualities: [50, 75],
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",

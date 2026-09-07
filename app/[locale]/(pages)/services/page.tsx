@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import LocalePage from '~/components/common/LocalePage';
 import BlueprintSketch from '~/components/widgets/BlueprintSketch';
 import CallToAction from '~/components/widgets/CallToAction';
 import FAQs from '~/components/widgets/FAQs';
@@ -15,16 +16,18 @@ export const metadata: Metadata = {
   title: 'Services',
 };
 
-export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-
+export default function Page({ params }: { params: Promise<{ locale: string }> }) {
   return (
-    <>
-      <Hero {...getHeroServices(locale)} />
-      <BlueprintSketch />
-      <Features2 {...getFeatures2Services(locale)} />
-      <FAQs {...getFaqsServices(locale)} />
-      <CallToAction {...getCallToActionServices(locale)} />
-    </>
+    <LocalePage params={params}>
+      {(locale) => (
+        <>
+          <Hero {...getHeroServices(locale)} />
+          <BlueprintSketch />
+          <Features2 {...getFeatures2Services(locale)} />
+          <FAQs {...getFaqsServices(locale)} />
+          <CallToAction {...getCallToActionServices(locale)} />
+        </>
+      )}
+    </LocalePage>
   );
 }

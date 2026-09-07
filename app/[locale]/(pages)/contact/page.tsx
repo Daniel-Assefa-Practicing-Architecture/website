@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-
+import LocalePage from '~/components/common/LocalePage';
 import EthiopiaMap from '~/components/widgets/EthiopiaMap';
 import Features2 from '~/components/widgets/Features2';
 import Hero from '~/components/widgets/Hero';
@@ -9,14 +9,16 @@ export const metadata: Metadata = {
   title: 'Contact',
 };
 
-export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-
+export default function Page({ params }: { params: Promise<{ locale: string }> }) {
   return (
-    <>
-      <Hero {...getHeroContact(locale)} />
-      <EthiopiaMap {...getContactDetails(locale)} />
-      <Features2 {...getFeatures2Contact(locale)} />
-    </>
+    <LocalePage params={params}>
+      {(locale) => (
+        <>
+          <Hero {...getHeroContact(locale)} />
+          <EthiopiaMap {...getContactDetails(locale)} />
+          <Features2 {...getFeatures2Contact(locale)} />
+        </>
+      )}
+    </LocalePage>
   );
 }

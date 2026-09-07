@@ -1,9 +1,9 @@
+import { Suspense } from 'react';
 import md from 'markdown-it';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 import { findPostBySlug, findLatestPosts } from '~/utils/posts';
-
 
 const getFormattedDate = (date) => date;
 
@@ -20,7 +20,7 @@ export async function generateStaticParams() {
   return (await findLatestPosts()).map(({ slug }) => ({ slug }));
 }
 
-export default async function Page({ params }) {
+async function PostBody({ params }) {
   const { slug, locale } = await params;
   const post = await findPostBySlug(slug, locale);
 
@@ -34,7 +34,6 @@ export default async function Page({ params }) {
         <header className={post.image ? 'text-center' : ''}>
           <p className="mx-auto max-w-3xl px-4 sm:px-6">
             <time dateTime={post.publishDate}>{getFormattedDate(post.publishDate)}</time> ~{' '}
-            {/* {Math.ceil(post.readingTime)} min read */}
           </p>
           <h1 className="leading-tighter font-heading mx-auto mb-8 max-w-3xl px-4 text-4xl font-bold tracking-tighter sm:px-6 md:text-5xl">
             {post.title}
@@ -70,5 +69,13 @@ export default async function Page({ params }) {
         />
       </article>
     </section>
+  );
+}
+
+export default function Page({ params }) {
+  return (
+    <Suspense fallback={<div className="min-h-[40vh]" aria-hidden />}>
+      <PostBody params={params} />
+    </Suspense>
   );
 }

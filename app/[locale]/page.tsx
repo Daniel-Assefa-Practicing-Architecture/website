@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { SITE } from '~/config.js';
+import LocalePage from '~/components/common/LocalePage';
 
 import ArchitecturalHero from '~/components/widgets/ArchitecturalHero';
 import Certifications from '~/components/widgets/Certifications';
@@ -28,21 +29,23 @@ export const metadata: Metadata = {
   title: SITE.title,
 };
 
-export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-
+export default function Page({ params }: { params: Promise<{ locale: string }> }) {
   return (
-    <>
-      <ArchitecturalHero {...getHeroHome(locale)} />
-      <Certifications {...getCertificationsHome(locale)} />
-      <SocialProof {...getSocialProofHome()} />
-      <Features {...getFeaturesHome(locale)} />
-      <Content {...getContentHomeOne(locale)} />
-      <Content {...getContentHomeTwo(locale)} />
-      <Steps {...getStepsHome(locale)} />
-      <FAQs2 {...getFaqs2Home(locale)} />
-      <Contact {...getContactHome(locale)} />
-      <CallToAction2 {...getCallToAction2Home(locale)} />
-    </>
+    <LocalePage params={params}>
+      {(locale) => (
+        <>
+          <ArchitecturalHero {...getHeroHome(locale)} />
+          <Certifications {...getCertificationsHome(locale)} />
+          <SocialProof {...getSocialProofHome()} />
+          <Features {...getFeaturesHome(locale)} />
+          <Content {...getContentHomeOne(locale)} />
+          <Content {...getContentHomeTwo(locale)} />
+          <Steps {...getStepsHome(locale)} />
+          <FAQs2 {...getFaqs2Home(locale)} />
+          <Contact {...getContactHome(locale)} />
+          <CallToAction2 {...getCallToAction2Home(locale)} />
+        </>
+      )}
+    </LocalePage>
   );
 }

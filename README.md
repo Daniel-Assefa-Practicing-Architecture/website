@@ -107,6 +107,8 @@ URL=https://danielassefa.org
 
 **2. Create the NGINX virtual host config:**
 
+### Dont forget to change the port and add github secrets!
+
 ```bash
 sudo nano /etc/nginx/sites-available/daniel_website
 ```
@@ -138,13 +140,13 @@ Confirm by a command instead because
 The browser fails because it uses **HTTPS**, and Cloudflare HTTPS still returns **520**:
 
 
-| **Path**                               | **Result** |
-| -------------------------------------- | ---------- |
+| **Path**                                     | **Result** |
+| -------------------------------------------- | ---------- |
 | `http://127.0.0.1` + Host `danielassefa.org` | 200        |
-| Origin `http://91.7.243.80`            | 200        |
-| Cloudflare **HTTP**                    | 200        |
-| Cloudflare **HTTPS**                   | **520**    |
-| Origin `:443`                          | broken     |
+| Origin `http://91.7.243.80`                  | 200        |
+| Cloudflare **HTTP**                          | 200        |
+| Cloudflare **HTTPS**                         | **520**    |
+| Origin `:443`                                | broken     |
 
 
 ```nginx

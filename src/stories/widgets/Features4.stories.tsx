@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Title, Subtitle, Description, Primary, Controls, Story, Stories } from '@storybook/blocks';
 
 import Component from '~/components/widgets/Features4';
-import { features4Services as mockData } from '~/shared/data/pages/services.data';
+import { featuresFourAboutTwo as mockData } from '~/shared/data/pages/about.data';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

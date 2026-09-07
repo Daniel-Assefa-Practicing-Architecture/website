@@ -26,9 +26,21 @@ export default async function BlogIndexPage({
       </header>
       <div className="grid grid-cols-1 gap-6  p-4 md:p-0 lg:grid-cols-2">
         {posts.map(({ slug, title, image }: { slug: string; title: string; image: string }) => (
-          <div key={slug} className="flex flex-col overflow-hidden rounded-xl border border-gray-200 shadow-lg">
+          <div key={slug} className="flex flex-col overflow-hidden rounded-xl border border-gray-200 shadow-lg dark:border-slate-700">
             <Link href={`/${slug}`}>
-              <Image width={650} height={340} alt={title} src={`${image}`} />
+              <Image
+                width={650}
+                height={340}
+                alt={title}
+                src={`${image}`}
+                className={`h-52 w-full ${
+                  image?.endsWith('.svg') || image?.endsWith('.png')
+                    ? 'bg-black object-contain'
+                    : 'object-cover'
+                }`}
+                loading="lazy"
+                decoding="async"
+              />
               <h2 className="p-4 font-bold">{title}</h2>
             </Link>
           </div>

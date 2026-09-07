@@ -171,13 +171,19 @@ const Header = () => {
             )}
             {actions && actions.length > 0 && (
               <div className="ml-4 rtl:ml-0 rtl:mr-4 flex w-max flex-wrap justify-end">
-                {actions.map((callToAction, index) => (
-                  <CTA
-                    key={`item-action-${index}`}
-                    callToAction={callToAction as CallToActionType}
-                    linkClass="btn btn-primary m-1 py-2 px-5 text-sm font-semibold shadow-none md:px-6"
-                  />
-                ))}
+                {actions.map((callToAction, index) => {
+                  const action = callToAction as CallToActionType;
+                  return (
+                    <CTA
+                      key={`item-action-${index}`}
+                      callToAction={{
+                        ...action,
+                        text: action.text ? t(action.text) : action.text,
+                      }}
+                      linkClass="btn btn-primary m-1 py-2 px-5 text-sm font-semibold shadow-none md:px-6"
+                    />
+                  );
+                })}
               </div>
             )}
           </div>

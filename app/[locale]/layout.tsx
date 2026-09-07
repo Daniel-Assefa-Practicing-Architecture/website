@@ -7,8 +7,10 @@ import { SITE } from '~/config.js';
 import HtmlLang from '~/components/atoms/HtmlLang';
 import Providers from '~/components/atoms/Providers';
 import Header from '~/components/widgets/Header';
-import Announcement from '~/components/widgets/Announcement';
 import Footer2 from '~/components/widgets/Footer2';
+import SkipToContent from '~/components/atoms/SkipToContent';
+import CookieConsent from '~/components/widgets/CookieConsent';
+import BackToTop from '~/components/atoms/BackToTop';
 
 import { Suspense } from 'react';
 
@@ -18,7 +20,7 @@ export interface LayoutProps {
 
 export const metadata: Metadata = {
   title: {
-    template: `%s — ${SITE.name}`,
+    template: `%s - ${SITE.name}`,
     default: SITE.title,
   },
   description: SITE.description,
@@ -41,10 +43,12 @@ async function AppContent({
     <NextIntlClientProvider locale={locale} messages={messages}>
       <HtmlLang />
       <Providers>
-        <Announcement />
+        <SkipToContent />
         <Header />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer2 />
+        <CookieConsent />
+        <BackToTop />
       </Providers>
     </NextIntlClientProvider>
   );

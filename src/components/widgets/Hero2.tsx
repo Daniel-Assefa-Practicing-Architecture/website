@@ -5,10 +5,10 @@ import CTA from '../common/CTA';
 const Hero2 = ({ title, subtitle, tagline, callToAction, callToAction2, image }: HeroProps) => {
   return (
     <section className="mt-[-72px] bg-primary-50 dark:bg-slate-800" id="heroTwo">
-      <div className="mx-auto max-w-7xl px-4 pt-[72px] sm:px-6 md:flex md:h-screen 2xl:h-auto">
-        <div className="block py-12 text-center md:flex md:py-12 md:text-left lg:py-16">
-          <div className="mx-auto flex max-w-5xl basis-[56%] items-center">
-            <div className="max-w-3xl pb-12 pr-0 md:py-0 md:pr-8 md:pb-0 lg:pr-16">
+      <div className="mx-auto max-w-7xl px-4 pt-[72px] sm:px-6 md:flex md:min-h-0 2xl:h-auto">
+        <div className="block py-12 text-center md:flex md:items-center md:py-16 md:text-left lg:py-20">
+          <div className="mx-auto flex max-w-5xl basis-[62%] items-center">
+            <div className="max-w-3xl pb-10 pr-0 md:py-0 md:pr-8 md:pb-0 lg:pr-12">
               {tagline && (
                 <p className="text-base font-semibold uppercase tracking-wide text-primary-600 dark:text-primary-200">
                   {tagline}
@@ -28,18 +28,19 @@ const Hero2 = ({ title, subtitle, tagline, callToAction, callToAction2, image }:
               </div>
             </div>
           </div>
-          <div className="block flex-1 items-center md:flex">
-            <div className="relative m-auto h-full max-w-4xl object-cover">
+          <div className="flex flex-1 items-center justify-center md:justify-end">
+            <div className="relative mx-auto w-full max-w-[16rem] sm:max-w-[18rem] md:mx-0 md:max-w-[15rem] lg:max-w-[17rem]">
               {image && (
                 <Image
-                  className="mx-auto h-full w-auto rounded-md bg-gray-400 object-cover drop-shadow-2xl dark:bg-slate-700"
+                  className="mx-auto h-auto w-full rounded-md bg-gray-400 object-cover drop-shadow-xl dark:bg-slate-700"
                   src={image.src}
                   alt={image.alt}
-                  width={540}
-                  height={405}
-                  sizes="(min-width: 1920px) 749px, (min-width: 1540px) 43.89vw, (min-width: 1360px) 542px, (min-width: 780px) calc(39.29vw + 16px), calc(96.52vw - 22px)"
+                  width={320}
+                  height={400}
+                  sizes="(min-width: 768px) 272px, 288px"
+                  style={{ width: '100%', height: 'auto' }}
                   loading="eager"
-                  placeholder="blur"
+                  {...(typeof image.src === 'object' ? { placeholder: 'blur' as const } : {})}
                   priority
                 />
               )}

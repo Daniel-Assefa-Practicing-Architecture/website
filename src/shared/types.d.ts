@@ -284,6 +284,8 @@ type ContentProps = Widget & {
   image?: Image;
   isReversed?: boolean;
   isAfterContent?: boolean;
+  /** Show the construction-site swing illustration beside the copy. */
+  showConstruction?: boolean;
 };
 
 type StepsProps = Widget & {
@@ -339,7 +341,9 @@ type ContactProps = Widget & {
   header?: Header;
   content?: string;
   items?: Array<Item>;
-  form: FormProps;
+  form?: FormProps;
+  mapEmbedUrl?: string;
+  mapTitle?: string;
 };
 
 type FooterProps = {

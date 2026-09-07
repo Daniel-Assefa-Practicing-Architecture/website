@@ -27,16 +27,17 @@ const Hero = ({ title, subtitle, tagline, callToAction, callToAction2, image }: 
             </div>
           </div>
           {image && (
-            <div className="relative m-auto max-w-5xl">
+            <div className="relative mx-auto max-w-md md:max-w-lg">
               <Image
-                className="mx-auto h-auto w-full rounded-md bg-gray-400 dark:bg-slate-700"
+                className="mx-auto h-auto w-full rounded-md bg-gray-400 object-cover dark:bg-slate-700"
                 src={image.src}
                 alt={image.alt}
-                width={1024}
-                height={607}
-                sizes="(max-width: 64rem) 100vw, 1024px"
+                width={640}
+                height={400}
+                sizes="(max-width: 768px) 28rem, 32rem"
+                style={{ width: '100%', height: 'auto' }}
                 loading="eager"
-                placeholder="blur"
+                {...(typeof image.src === 'object' ? { placeholder: 'blur' as const } : {})}
                 priority
               />
             </div>

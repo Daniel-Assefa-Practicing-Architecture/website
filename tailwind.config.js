@@ -7,10 +7,12 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-source-sans)', ...defaultTheme.fontFamily.sans],
+        heading: ['var(--font-fraunces)', ...defaultTheme.fontFamily.serif],
       },
       colors: {
-        secondary: colors.blue,
+        secondary: colors.yellow,
+        highlight: colors.yellow,
       },
     },
   },

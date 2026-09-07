@@ -1,271 +1,126 @@
-import { ComparisonProps, FAQsProps, PricingProps } from '~/shared/types';
-import { HeroProps } from '~/shared/types';
+import { ComparisonProps, FAQsProps, PricingProps, HeroProps } from '~/shared/types';
+import amCopy from '../copy-am.json';
+import { pick } from '../locale';
 
-// Hero data on Pricing page *******************
-export const heroPricing: HeroProps = {
-  title: 'Pricing.title',
-  subtitle: (
-    <>
-      <span className="hidden md:inline">
-        {`Pricing.subtitle`}
-      </span>{' '}
-      Pricing.subtitle2
-    </>
-  ),
-  tagline: 'Demo Pricing Page',
-};
-
-// Pricing data on Pricing page *******************
-export const pricingPricing: PricingProps = {
-  id: 'pricing-on-pricing',
-  hasBackground: true,
-  header: {
-    title: 'Pricing.ourPlans',
-    subtitle: (
-      <>
-        Pricing.plansSubtitle{' '}
-        <span className="hidden md:inline">{`Pricing.plansSubtitle2`}</span>
-      </>
+export function getHeroPricing(locale = 'en'): HeroProps {
+  return {
+    title: pick(locale, 'How we can work together', 'እንዴት አብረን መሥራት እንችላለን'),
+    subtitle: pick(
+      locale,
+      'Clear engagement paths for design, supervision, and estimation from our Addis Ababa studio.',
+      'ከአዲስ አበባ ስቱዲዮአችን ለንድፍ፣ ለክትትል እና ለግምት ግልጽ የሥራ መንገዶች።',
     ),
-  },
-  prices: [
-    {
-      title: 'Pricing.basic',
-      subtitle: 'Pricing.basicSubtitle',
-      price: 150,
-      period: 'Pricing.perMonth',
-      items: [
-        {
-          description: 'Design consultation and requirements gathering.',
-        },
-        {
-          description: 'Wireframing and basic UI/UX design concepts.',
-        },
-        {
-          description: 'Up to 5 design revisions and feedback incorporation.',
-        },
-        {
-          description: 'Design files delivery in standard formats.',
-        },
-      ],
-      callToAction: {
-        targetBlank: true,
-        text: 'Pricing.freeTrial',
-        href: '/',
-      },
-      hasRibbon: false,
-    },
-    {
-      title: 'Pricing.standard',
-      subtitle: 'Pricing.standardSubtitle',
-      price: 350,
-      period: 'Pricing.perMonth',
-      items: [
-        {
-          description: 'Comprehensive design consultation and user research.',
-        },
-        {
-          description: 'Detailed wireframes, mockups, and interactive prototypes.',
-        },
-        {
-          description: 'Unlimited design revisions and client collaboration.',
-        },
-        {
-          description: 'High-fidelity designs with branding integration.',
-        },
-      ],
-      callToAction: {
-        targetBlank: true,
-        text: 'Pricing.free15Trial',
-        href: '/',
-      },
-      hasRibbon: true,
-      ribbonTitle: 'Pricing.popular',
-    },
-    {
-      title: 'Pricing.premium',
-      subtitle: 'Pricing.premiumSubtitle',
-      price: 750,
-      period: 'Pricing.perMonth',
-      items: [
-        {
-          description: 'Full-service design package with strategy and planning.',
-        },
-        {
-          description: 'Complete UI/UX design system and component library.',
-        },
-        {
-          description: 'Advanced prototyping, user testing, and analytics setup.',
-        },
-        {
-          description: 'Ongoing design support and maintenance services.',
-        },
-      ],
-      callToAction: {
-        targetBlank: true,
-        text: 'Pricing.free30Trial',
-        href: '/',
-      },
-      hasRibbon: false,
-    },
-  ],
-};
+    tagline: pick(locale, 'Consultation', 'ምክክር'),
+  };
+}
 
-// Comparison pricing data on Pricing page *******************
-export const comparisonPricing: ComparisonProps = {
-  id: 'comparison-on-pricing',
-  hasBackground: false,
-  header: {
-    title: "What's available for each plan?",
-    subtitle:
-      'Morbi ut imperdiet ex. Nullam sed tincidunt purus. Donec finibus dui at odio dictum facilisis. Maecenas ut orci quis nisi congue maximus. Sed quis augue sapien.',
-    // tagline: 'Comparison',
-  },
-  columns: [
-    {
-      title: 'compare plans',
-      items: [
-        {
-          title: 'In vitae finibus',
-        },
-        {
-          title: 'Cras sollicitudin',
-        },
-        {
-          title: 'Suspendisse',
-        },
-        {
-          title: 'Vestibulum ornare',
-        },
-        {
-          title: 'In hendrerit',
-        },
-        {
-          title: 'Ut pharetra',
-        },
-      ],
+export function getPricingPricing(locale = 'en'): PricingProps {
+  return {
+    id: 'pricing-on-pricing',
+    hasBackground: true,
+    header: {
+      title: pick(locale, 'Ways to begin', 'ለመጀመር መንገዶች'),
+      subtitle: pick(
+        locale,
+        'From a first sketch review to full project leadership. Every engagement starts with a conversation.',
+        'ከመጀመሪያ የንድፍ ግምገማ እስከ ሙሉ የፕሮጀክት አመራር። እያንዳንዱ ሥራ በውይይት ይጀምራል።',
+      ),
     },
-    {
-      title: 'basic',
-      items: [
-        {
-          title: 'Free 7-day trial',
+    prices: [
+      {
+        title: pick(locale, 'Sketch review', 'የንድፍ ግምገማ'),
+        subtitle: pick(locale, 'A focused look at a site or an early idea', 'በጣቢያ ወይም በመጀመሪያ ሀሳብ ላይ ያተኮረ እይታ'),
+        price: 0,
+        period: pick(locale, 'conversation', 'ውይይት'),
+        items: [
+          { description: pick(locale, 'Site notes and brief review', 'የጣቢያ ማስታወሻ እና ብሪፍ ግምገማ') },
+          { description: pick(locale, 'Design direction recommendations', 'የንድፍ አቅጣጫ ምክሮች') },
+          { description: pick(locale, 'Clear next-step outline', 'ግልጽ የቀጣይ እርምጃ ዝርዝር') },
+        ],
+        callToAction: {
+          text: pick(locale, 'Write to us', 'ይጻፉልን'),
+          href: '/contact',
         },
-        {
-          title: 'Limited',
-        },
-        {
-          title: '$29',
-        },
-        {
-          title: false,
-        },
-        {
-          title: false,
-        },
-        {
-          title: true,
-        },
-      ],
-      callToAction: {
-        text: 'Get started',
-        href: '/',
+        hasRibbon: false,
       },
-    },
-    {
-      title: 'standard',
-      items: [
-        {
-          title: 'Free 15-day trial',
+      {
+        title: pick(locale, 'Design leadership', 'የንድፍ አመራር'),
+        subtitle: pick(locale, 'From brief to construction documents', 'ከብሪፍ እስከ የግንባታ ሰነዶች'),
+        price: 0,
+        period: pick(locale, 'project-based', 'በፕሮጀክት'),
+        items: [
+          { description: pick(locale, 'Schematic and developed design', 'መርሐግብር እና የተሻሻለ ንድፍ') },
+          { description: pick(locale, 'Coordination with engineering teams', 'ከምህንድስና ቡድኖች ጋር ማቀናጀት') },
+          { description: pick(locale, 'Construction document set', 'የግንባታ ሰነድ ስብስብ') },
+        ],
+        callToAction: {
+          text: pick(locale, 'Book a consult', 'ምክክር ይያዙ'),
+          href: '/contact',
         },
-        {
-          title: 'Unlimited',
-        },
-        {
-          title: '$69',
-        },
-        {
-          title: false,
-        },
-        {
-          title: true,
-        },
-        {
-          title: true,
-        },
-      ],
-      callToAction: {
-        text: 'Get started',
-        href: '/',
+        hasRibbon: true,
+        ribbonTitle: pick(locale, 'Most requested', 'በብዛት የሚጠየቅ'),
       },
-    },
-    {
-      title: 'premium',
-      items: [
-        {
-          title: 'Free 30-day trial',
+      {
+        title: pick(locale, 'Full project care', 'ሙሉ የፕሮጀክት እንክብካቤ'),
+        subtitle: pick(locale, 'Design, supervision, and contract administration', 'ንድፍ፣ ክትትል እና የውል አስተዳደር'),
+        price: 0,
+        period: pick(locale, 'project-based', 'በፕሮጀክት'),
+        items: [
+          { description: pick(locale, 'End-to-end design leadership', 'ከጫፍ እስከ ጫፍ የንድፍ አመራር') },
+          { description: pick(locale, 'On-site construction supervision', 'በጣቢያ የግንባታ ክትትል') },
+          { description: pick(locale, 'Budget and contract stewardship', 'በጀት እና የውል አስተዳደር') },
+        ],
+        callToAction: {
+          text: pick(locale, 'Start a project', 'ፕሮጀክት ይጀምሩ'),
+          href: '/contact',
         },
-        {
-          title: 'Unlimited',
-        },
-        {
-          title: '$199',
-        },
-        {
-          title: true,
-        },
-        {
-          title: true,
-        },
-        {
-          title: true,
-        },
-      ],
-      callToAction: {
-        text: 'Get started',
-        href: '/',
+        hasRibbon: false,
       },
-    },
-  ],
-};
+    ],
+  };
+}
 
-// FAQS3 data on Pricing page *******************
-export const faqs3Pricing: FAQsProps = {
-  id: 'faqsThree-on-pricing',
-  hasBackground: true,
-  header: {
-    title: 'Pricing FAQs',
-    subtitle: 'Do you have other questions?',
-    // tagline: 'FAQS',
-  },
-  items: [
-    {
-      title: 'Which plan is best for me?',
-      description: `Nunc mollis tempor quam, non fringilla elit sagittis in. Nullam vitae consectetur mi, a elementum arcu. Sed laoreet, ipsum et vehicula dignissim, leo orci pretium sem, ac condimentum tellus est quis ligula.`,
+export function getFaqs3Pricing(locale = 'en'): FAQsProps {
+  return {
+    id: 'faqsThree-on-pricing',
+    hasBackground: false,
+    header: {
+      title: pick(locale, 'Questions about engagement', amCopy.faqsTitle),
     },
-    {
-      title: 'What are my payment options?',
-      description: `Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer eleifend vestibulum nisl in iaculis. Mauris dictum ac purus vestibulum auctor. Praesent imperdiet lectus et massa faucibus, quis viverra massa rhoncus.`,
+    items: [
+      {
+        title: pick(locale, 'Where is the studio?', amCopy.faqWhere),
+        description: pick(locale, 'Daniel Assefa Practicing Architecture is based in Addis Ababa, Ethiopia, and works on projects across the country.', amCopy.faqWhereAns),
+      },
+      {
+        title: pick(locale, 'How do we start a conversation?', amCopy.faqStart),
+        description: pick(locale, 'Write to danassgebbal12@gmail.com or call +1 (437) 833-2850. A short brief and site notes are enough to begin.', amCopy.faqStartAns),
+      },
+      {
+        title: pick(locale, 'Are you a registered practice?', amCopy.faqReg),
+        description: pick(locale, 'Yes. Registered Architect and Professional Member of the Ethiopian Association of Architects, certified by the Ethiopian Engineering Council, and CPD accredited.', amCopy.faqRegAns),
+      },
+    ],
+  };
+}
+
+export function getComparisonPricing(locale = 'en'): ComparisonProps {
+  return {
+    id: 'comparison-on-pricing',
+    hasBackground: true,
+    header: {
+      title: pick(locale, 'Compare engagements', 'የሥራ ዓይነቶችን አወዳድሩ'),
+      subtitle: pick(locale, 'Choose the path that fits the scale of your Ethiopian project.', 'ከኢትዮጵያ ፕሮጀክትዎ መጠን ጋር የሚስማማውን መንገድ ይምረጡ።'),
     },
-    {
-      title: 'How do I change my plan to a different one?',
-      description: `Mauris vitae eros a dui varius luctus. Suspendisse rutrum, sapien nec blandit bibendum, justo sapien sollicitudin erat, id aliquam sapien purus quis leo. Aliquam vulputate vestibulum consectetur.`,
-    },
-    {
-      title: 'What happen at the end of my free trial?',
-      description: `Nunc dapibus lacinia ipsum ut elementum. Integer in pretium sapien. Ut pretium nisl mauris, ut rutrum justo condimentum id. Etiam aliquet, arcu at iaculis laoreet, est arcu egestas sapien, eget sollicitudin odio orci et nunc.`,
-    },
-    {
-      title: 'Can I import data from other tools?',
-      description: `Duis in maximus mauris, id eleifend mauris. Nam a fringilla arcu. Curabitur convallis, tellus non aliquet rhoncus, lacus massa auctor eros, in interdum lectus augue sed augue. Fusce tempor ex id faucibus efficitur.`,
-    },
-    {
-      title: 'Can I cancel my plan at any time?',
-      description: `Nullam imperdiet sapien tincidunt erat dapibus faucibus. Vestibulum a sem nec lorem imperdiet scelerisque non sed lacus. Ut pulvinar id diam vitae auctor. Nam tempus, neque et elementum consectetur, ex ipsum pulvinar risus, vel sodales ligula tortor eu eros.`,
-    },
-  ],
-  callToAction: {
-    text: 'Contact us',
-    href: '/contact',
-  },
-};
+    columns: [
+      { title: pick(locale, 'Sketch review', 'የንድፍ ግምገማ'), items: [{ title: pick(locale, 'Brief review', 'ብሪፍ ግምገማ') }, { title: pick(locale, 'Direction notes', 'የአቅጣጫ ማስታወሻዎች') }] },
+      { title: pick(locale, 'Design leadership', 'የንድፍ አመራር'), items: [{ title: pick(locale, 'Full design set', 'ሙሉ የንድፍ ስብስብ') }, { title: pick(locale, 'Team coordination', 'የቡድን ማቀናጀት') }] },
+      { title: pick(locale, 'Full project care', 'ሙሉ እንክብካቤ'), items: [{ title: pick(locale, 'Design + supervision', 'ንድፍ + ክትትል') }, { title: pick(locale, 'Contract care', 'የውል እንክብካቤ') }] },
+    ],
+  };
+}
+
+export const heroPricing = getHeroPricing('en');
+export const pricingPricing = getPricingPricing('en');
+export const faqs3Pricing = getFaqs3Pricing('en');
+export const comparisonPricing = getComparisonPricing('en');

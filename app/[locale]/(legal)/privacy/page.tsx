@@ -8,8 +8,10 @@ export const metadata: Metadata = {
   title: 'Privacy',
 };
 
-const Page = () => {
-  const filePath = path.join(process.cwd(), 'src/content/privacy/privacy.md');
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const fileName = locale === 'am' ? 'privacy.am.md' : 'privacy.md';
+  const filePath = path.join(process.cwd(), 'src/content/privacy', fileName);
   const fileContent = fs.readFileSync(filePath, 'utf8');
 
   return (
@@ -22,6 +24,4 @@ const Page = () => {
       }}
     />
   );
-};
-
-export default Page;
+}

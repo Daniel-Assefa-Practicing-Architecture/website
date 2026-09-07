@@ -31,6 +31,8 @@ const Features4 = ({
             width={728}
             height={320}
             sizes="(max-width: 64rem) 100vw, 1024px"
+            loading="lazy"
+            decoding="async"
           />
         )}
       </div>

@@ -1,149 +1,109 @@
-import { IconClock, IconHeadset, IconHelp, IconMapPin, IconMessages, IconPhoneCall } from '@tabler/icons-react';
-import { ContactProps, FeaturesProps } from '~/shared/types';
-import { HeroProps } from '~/shared/types';
+import { FeaturesProps, HeroProps } from '~/shared/types';
+import amCopy from '../copy-am.json';
+import { pick } from '../locale';
 
-// Hero data on Contact page *******************
-export const heroContact: HeroProps = {
-  title: 'Get in touch with us',
-  subtitle: (
-    <>
-      <span className="hidden md:inline">{`Thank you for considering us for your project! We're excited to hear from you.`}</span>{' '}
-      {`Our team can assist you in building your dream website.`}
-    </>
-  ),
-  tagline: 'Demo Contact Page',
-};
+export function getHeroContact(locale = 'en'): HeroProps {
+  return {
+    title: pick(locale, 'Find the studio', amCopy.findStudio),
+    subtitle: pick(
+      locale,
+      'Daniel Assefa Practicing Architecture is based in Addis Ababa, Ethiopia. Reach us by phone or email to begin a project conversation.',
+      amCopy.contactHeroSubtitle,
+    ),
+    tagline: pick(locale, 'Contact', amCopy.contactTag),
+  };
+}
 
-// Contact data on Contact page *******************
-export const contact2Contact: ContactProps = {
+export function getContactDetails(locale = 'en') {
+  return {
+    title: pick(locale, 'Addis Ababa, Ethiopia', amCopy.mapTitle),
+    subtitle: pick(
+      locale,
+      'Our practice serves clients across Ethiopia with design, supervision, and project leadership.',
+      amCopy.mapSubtitle,
+    ),
+    visitLabel: pick(locale, 'Visit', amCopy.visit),
+    mapTitle: pick(locale, 'Map of Addis Ababa, Ethiopia', amCopy.mapIframeTitle),
+    addressLines: [
+      pick(locale, 'Addis Ababa, Ethiopia', amCopy.mapTitle),
+      `${pick(locale, 'Phone', amCopy.phoneLabel)}: +1 (437) 833-2850`,
+      `${pick(locale, 'Email', amCopy.emailLabel)}: danassgebbal12@gmail.com`,
+    ],
+  };
+}
+
+export function getFeatures2Contact(locale = 'en'): FeaturesProps {
+  return {
+    columns: 3,
+    header: {
+      title: pick(locale, 'How to reach us', amCopy.howReach),
+      subtitle: pick(
+        locale,
+        'Prefer a direct line? Use email or phone, we do not use a contact form.',
+        amCopy.howReachSub,
+      ),
+    },
+    items: [
+      {
+        title: pick(locale, 'Project inquiry', 'የፕሮጀክት ጥያቄ'),
+        description: pick(locale, 'Share a brief site note and we will respond with next steps.', 'አጭር የጣቢያ ማስታወሻ ይላኩ እና ቀጣይ እርምጃዎችን እንመልሳለን።'),
+        callToAction: {
+          text: pick(locale, 'Email the studio', 'ስቱዲዮውን ኢሜይል ያድርጉ'),
+          href: 'mailto:danassgebbal12@gmail.com',
+        },
+      },
+      {
+        title: pick(locale, 'Call', 'ይደውሉ'),
+        description: pick(locale, 'Speak with the practice about timelines and scope.', 'ስለ ጊዜ ሰሌዳ እና ስፋት ከልምዱ ጋር ይነጋገሩ።'),
+        callToAction: {
+          text: pick(locale, 'Call +1 (437) 833-2850', amCopy.callStudio),
+          href: 'tel:+14378332850',
+        },
+      },
+      {
+        title: pick(locale, 'Questions', amCopy.faqsTag),
+        description: pick(locale, 'Read common answers about how we work.', 'እንዴት እንደምንሠራ የተለመዱ መልሶችን ያንብቡ።'),
+        callToAction: {
+          text: pick(locale, 'View FAQs', amCopy.faqsPageTitle),
+          href: '/faqs',
+        },
+      },
+      {
+        title: pick(locale, 'Portfolio', amCopy.headerPortfolio),
+        description: pick(locale, 'Browse built and designed work across Ethiopia.', amCopy.ctaPortfolioDesc),
+        callToAction: {
+          text: pick(locale, 'See portfolio', amCopy.seePortfolio),
+          href: '/portfolio',
+        },
+      },
+    ],
+  };
+}
+
+/** Kept for Storybook; contact page uses the map, not this form. */
+export const contact2Contact = {
   id: 'contactTwo-on-contact',
   hasBackground: true,
   header: {
-    title: 'Contact us',
-    subtitle: (
-      <>
-        Please take a moment to fill out this form.{' '}
-        <span className="hidden md:inline">{`So we can better understand your needs and get the process started smoothly.`}</span>
-      </>
-    ),
+    title: 'Contact the studio',
+    subtitle: 'Prefer email or phone, see the map on the contact page for our Addis Ababa location.',
   },
-  items: [
-    {
-      title: 'Our Address',
-      description: ['1230 Maecenas Street Donec Road', 'New York, EEUU'],
-      icon: IconMapPin,
-    },
-    {
-      title: 'Contact',
-      description: ['Mobile: +1 (123) 456-7890', 'Mail: tailnext@gmail.com'],
-      icon: IconPhoneCall,
-    },
-    {
-      title: 'Working hours',
-      description: ['Monday - Friday: 08:00 - 17:00', 'Saturday & Sunday: 08:00 - 12:00'],
-      icon: IconClock,
-    },
-  ],
   form: {
-    title: 'Ready to Get Started?',
+    title: 'Studio inquiry',
     inputs: [
-      {
-        type: 'text',
-        label: 'First name',
-        name: 'name',
-        autocomplete: 'off',
-        placeholder: 'First name',
-      },
-      {
-        type: 'text',
-        label: 'Last name',
-        name: 'lastName',
-        autocomplete: 'off',
-        placeholder: 'Last name',
-      },
-      {
-        type: 'email',
-        label: 'Email address',
-        name: 'email',
-        autocomplete: 'on',
-        placeholder: 'Email address',
-      },
+      { type: 'text' as const, name: 'name', autocomplete: 'off', placeholder: 'Your name' },
+      { type: 'email' as const, name: 'email', autocomplete: 'on', placeholder: 'Your email' },
     ],
-    radioBtns: {
-      label: 'What is the reason for your contact?',
-      radios: [
-        {
-          label: 'General inquiries',
-        },
-        {
-          label: 'Technical help',
-        },
-        {
-          label: 'Claims',
-        },
-        {
-          label: 'Others',
-        },
-      ],
-    },
     textarea: {
       cols: 30,
       rows: 5,
-      label: 'How can we help you?',
       name: 'textarea',
-      placeholder: 'Write your message...',
+      placeholder: 'Tell us about the site and brief.',
     },
-    checkboxes: [
-      {
-        label: 'Have you read our privacy policy?',
-        value: '',
-      },
-      {
-        label: 'Do you want to receive monthly updates by email?',
-        value: '',
-      },
-    ],
-    btn: {
-      title: 'Send Message',
-      type: 'submit',
-    },
+    btn: { title: 'Send message', type: 'submit' as const },
   },
 };
 
-// Feature2 data on Contact page *******************
-export const features2Contact: FeaturesProps = {
-  columns: 3,
-  header: {
-    title: 'Support Center',
-    subtitle: 'Looking for something in particular?',
-  },
-  items: [
-    {
-      title: 'Have a question?',
-      description: 'See our frequently asked questions',
-      icon: IconHelp,
-      callToAction: {
-        text: 'Go to FAQ page',
-        href: '/faqs',
-      },
-    },
-    {
-      title: 'Chat with us',
-      description: 'Live chat with our support team',
-      icon: IconMessages,
-      callToAction: {
-        text: 'Write to us',
-        href: '/',
-      },
-    },
-    {
-      title: 'Get help',
-      description: 'Speak to our team today',
-      icon: IconHeadset,
-      callToAction: {
-        text: 'Call us',
-        href: '/',
-      },
-    },
-  ],
-};
+export const heroContact = getHeroContact('en');
+export const contactDetails = getContactDetails('en');
+export const features2Contact = getFeatures2Contact('en');

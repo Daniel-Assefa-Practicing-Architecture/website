@@ -1,36 +1,58 @@
 {
   "Header": {
-    "pages": "Pages",
+    "pages": "More",
     "blog": "Blog",
     "contact": "Contact",
     "services": "Services",
-    "pricing": "Pricing",
-    "about": "About us",
+    "pricing": "Consultation",
+    "about": "About",
     "faqs": "FAQs",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "portfolio": "Portfolio"
+  },
+  "Cookie": {
+    "title": "Cookies on this site",
+    "body": "We use essential cookies to keep the site working and optional cookies to understand how visitors use our practice pages.",
+    "privacy": "Privacy policy",
+    "accept": "Accept",
+    "reject": "Reject"
+  },
+  "Home": {
+    "title": "Daniel Assefa Practicing Architecture",
+    "subtitle": "Architecture, urban design, and construction care"
+  },
+  "Footer": {
+    "studio": "Studio",
+    "phone": "Phone",
+    "email": "Email",
+    "social": "Social",
+    "addis": "Addis Ababa, Ethiopia",
+    "practice": "Daniel Assefa Practicing Architecture",
     "terms": "Terms & Conditions",
     "privacy": "Privacy Policy"
   },
-  "Home": {
-    "title": "Welcome to TailNext",
-    "subtitle": "A Next.js template for modern web development"
+  "A11y": {
+    "skipToContent": "Skip to content",
+    "backToTop": "Back to top"
   },
   "Pricing": {
-    "title": "Design Estimation Services",
-    "subtitle": "Get professional design estimates tailored to your project needs. Whether you're planning a simple website redesign or a complete digital transformation, our expert team provides accurate cost breakdowns and timelines.",
-    "subtitle2": "Choose the estimation package that fits your project scope!",
-    "ourPlans": "Our Estimation Plans",
-    "plansSubtitle": "Discover our comprehensive design estimation services designed to provide clarity and confidence for your projects.",
-    "plansSubtitle2": "No matter the complexity, we deliver detailed, actionable estimates.",
-    "basic": "Basic Design Estimate",
-    "basicSubtitle": "Perfect for small websites and simple redesigns",
-    "standard": "Comprehensive Design Estimate",
-    "standardSubtitle": "Ideal for medium-sized projects and business websites",
-    "premium": "Full Project Estimation",
-    "premiumSubtitle": "Complete estimation for large-scale digital projects",
-    "perMonth": "one-time fee",
-    "freeTrial": "Get Quote",
-    "free15Trial": "Get Detailed Quote",
-    "free30Trial": "Schedule Consultation",
-    "popular": "Most Popular"
+    "title": "How we can work together",
+    "subtitle": "Clear engagement paths for design, supervision, and estimation.",
+    "subtitle2": "Choose the conversation that fits the project.",
+    "ourPlans": "Ways to begin",
+    "plansSubtitle": "From a first sketch review to full project leadership.",
+    "plansSubtitle2": "Every engagement starts with a conversation.",
+    "basic": "Sketch review",
+    "basicSubtitle": "A focused look at a site or an early idea",
+    "standard": "Design leadership",
+    "standardSubtitle": "From brief to construction documents",
+    "premium": "Full project care",
+    "premiumSubtitle": "Design, supervision, and contract administration",
+    "perMonth": "starting conversation",
+    "freeTrial": "Write to us",
+    "free15Trial": "Book a consult",
+    "free30Trial": "Start a project",
+    "popular": "Most requested"
   }
 }

@@ -8,8 +8,10 @@ export const metadata: Metadata = {
   title: 'Terms and conditions',
 };
 
-const Page = () => {
-  const filePath = path.join(process.cwd(), 'src/content/terms/terms.md');
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const fileName = locale === 'am' ? 'terms.am.md' : 'terms.md';
+  const filePath = path.join(process.cwd(), 'src/content/terms', fileName);
   const fileContent = fs.readFileSync(filePath, 'utf8');
 
   return (
@@ -22,6 +24,4 @@ const Page = () => {
       }}
     />
   );
-};
-
-export default Page;
+}

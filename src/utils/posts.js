@@ -3,6 +3,7 @@ import matter from 'gray-matter';
 import { join } from 'path';
 
 import { locales } from '~/i18n/routing';
+import { mediaUrl } from '~/shared/data/media';
 
 const BLOG_DIR = join(process.cwd(), 'src/content/blog');
 
@@ -34,6 +35,11 @@ function sortPostsChronologically(posts) {
     if (aTime !== bTime) return aTime - bTime;
     return String(a.slug).localeCompare(String(b.slug));
   });
+}
+
+function withRemoteImage(post) {
+  if (!post?.image) return post;
+  return { ...post, image: mediaUrl(post.image) };
 }
 
 function loadLocale(locale) {
@@ -89,11 +95,11 @@ export const findPostBySlug = async (slug, locale = 'en') => {
       const raw = fs.readFileSync(filepath, 'utf-8');
       const { data: frontmatter, content } = matter(raw);
 
-      return {
+      return withRemoteImage({
         slug,
         ...frontmatter,
         content,
-      };
+      });
     } catch (e) {
       /* next candidate */
     }

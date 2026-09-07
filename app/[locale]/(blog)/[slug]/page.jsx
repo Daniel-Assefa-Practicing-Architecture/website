@@ -42,7 +42,11 @@ export default async function Page({ params }) {
           {post.image ? (
             <Image
               src={post.image}
-              className="mx-auto mt-4 mb-6 max-w-full bg-gray-400 dark:bg-slate-700 sm:rounded-md lg:max-w-6xl"
+              className={`mx-auto mt-4 mb-6 max-w-full sm:rounded-md lg:max-w-6xl ${
+                String(post.image).endsWith('.svg') || String(post.image).endsWith('.png')
+                  ? 'bg-black object-contain'
+                  : 'bg-gray-400 object-cover dark:bg-slate-700'
+              }`}
               sizes="(max-width: 900px) 400px, 900px"
               alt={post.description}
               loading="eager"

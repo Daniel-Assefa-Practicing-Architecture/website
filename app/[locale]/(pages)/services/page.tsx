@@ -1,39 +1,30 @@
 import { Metadata } from 'next';
+import BlueprintSketch from '~/components/widgets/BlueprintSketch';
 import CallToAction from '~/components/widgets/CallToAction';
-import Content from '~/components/widgets/Content';
 import FAQs from '~/components/widgets/FAQs';
 import Features2 from '~/components/widgets/Features2';
-import Features4 from '~/components/widgets/Features4';
 import Hero from '~/components/widgets/Hero';
-import Testimonials from '~/components/widgets/Testimonials';
 import {
-  callToActionServices,
-  contentServicesOne,
-  contentServicesTwo,
-  faqsServices,
-  features2Services,
-  features4Services,
-  heroServices,
-  testimonialsServices,
+  getCallToActionServices,
+  getFaqsServices,
+  getFeatures2Services,
+  getHeroServices,
 } from '~/shared/data/pages/services.data';
 
 export const metadata: Metadata = {
   title: 'Services',
 };
 
-const Page = () => {
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+
   return (
     <>
-      <Hero {...heroServices} />
-      <Features2 {...features2Services} />
-      <Content {...contentServicesOne} />
-      <Content {...contentServicesTwo} />
-      <Features4 {...features4Services} />
-      <Testimonials {...testimonialsServices} />
-      <FAQs {...faqsServices} />
-      <CallToAction {...callToActionServices} />
+      <Hero {...getHeroServices(locale)} />
+      <BlueprintSketch />
+      <Features2 {...getFeatures2Services(locale)} />
+      <FAQs {...getFaqsServices(locale)} />
+      <CallToAction {...getCallToActionServices(locale)} />
     </>
   );
-};
-
-export default Page;
+}

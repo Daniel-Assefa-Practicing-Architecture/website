@@ -4,21 +4,28 @@ import WidgetWrapper from '../common/WidgetWrapper';
 
 const SocialProof = ({ images, id, hasBackground = false }: SocialProofProps) => (
   <WidgetWrapper id={id ? id : ''} hasBackground={hasBackground} containerClass="">
-    <div className="flex items-center justify-center gap-6 md:gap-9">
+    <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-8 md:gap-x-14 md:gap-y-10">
       {images &&
         images.map(({ src, alt, link }, index) => (
-          <div key={`item-social-proof-${index}`}>
-            <a href={link} target="_blank" rel="noopener">
-              <Image
-                src={src}
-                alt={alt}
-                className="w-12 h-12 opacity-50 contrast-50 grayscale duration-75 hover:opacity-100 hover:contrast-100 hover:grayscale-0 md:w-16 md:h-16"
-                object-fit="contain"
-                width={64}
-                height={64}
-              />
-            </a>
-          </div>
+          <a
+            key={`item-social-proof-${index}`}
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-16 items-center justify-center md:h-24"
+          >
+            <Image
+              src={src}
+              alt={alt}
+              className="h-full max-w-[11rem] object-contain transition duration-150 hover:scale-105 md:max-w-[14rem]"
+              width={224}
+              height={96}
+              sizes="(max-width: 768px) 176px, 224px"
+              style={{ width: 'auto', height: '100%' }}
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
         ))}
     </div>
   </WidgetWrapper>

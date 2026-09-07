@@ -2,23 +2,21 @@ import type { Metadata } from 'next';
 
 import Hero from '~/components/widgets/Hero';
 import Pricing from '~/components/widgets/Pricing';
-import Comparison from '~/components/widgets/Comparison';
 import FAQs3 from '~/components/widgets/FAQs3';
-import { heroPricing, comparisonPricing, faqs3Pricing, pricingPricing } from '~/shared/data/pages/pricing.data';
+import { getFaqs3Pricing, getHeroPricing, getPricingPricing } from '~/shared/data/pages/pricing.data';
 
 export const metadata: Metadata = {
-  title: 'Pricing',
+  title: 'Consultation',
 };
 
-const Page = () => {
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+
   return (
     <>
-      <Hero {...heroPricing} />
-      <Pricing {...pricingPricing} />
-      <Comparison {...comparisonPricing} />
-      <FAQs3 {...faqs3Pricing} />
+      <Hero {...getHeroPricing(locale)} />
+      <Pricing {...getPricingPricing(locale)} />
+      <FAQs3 {...getFaqs3Pricing(locale)} />
     </>
   );
-};
-
-export default Page;
+}

@@ -1,21 +1,4 @@
-import {
-  IconArrowsRightLeft,
-  IconBrandLinkedin,
-  IconBrandTailwind,
-  IconBrandTwitter,
-  IconBulb,
-  IconChartBar,
-  IconCheck,
-  IconClock,
-  IconComponents,
-  IconDownload,
-  IconListCheck,
-  IconMail,
-  IconMapPin,
-  IconPhoneCall,
-  IconRocket,
-  IconSearch,
-} from '@tabler/icons-react';
+import { IconClock, IconMail, IconMapPin, IconPhoneCall } from '@tabler/icons-react';
 import {
   CallToActionProps,
   ContactProps,
@@ -23,686 +6,246 @@ import {
   FAQsProps,
   FeaturesProps,
   HeroProps,
-  PricingProps,
   SocialProofProps,
   StepsProps,
-  TeamProps,
-  TestimonialsProps,
 } from '../../types';
-import heroImg from '~/assets/images/hero.jpg';
-import nextJsLogo from '~/assets/images/nextjs-logo.png';
-import reactLogo from '~/assets/images/react-logo.png';
-import tailwindCssLogo from '~/assets/images/tailwind-css-logo.png';
-import typescriptLogo from '~/assets/images/typescript-logo.png';
-import cameraFrontImg from '~/assets/images/camera-front.jpg';
-import cameraBackImg from '~/assets/images/camera-back.jpg';
-import gasImg from '~/assets/images/gas.jpg';
+import amCopy from '../copy-am.json';
+import { pick } from '../locale';
+import { mediaUrl } from '../media';
+import { getFeaturedProjects } from '../projects';
 
-// Hero data on Home page *******************
-export const heroHome: HeroProps = {
-  title: (
-    <>
-      Free template for <span className="hidden md:inline">starts a website using</span> <span>Next.js</span> +{' '}
-      <span className="sm:whitespace-nowrap">Tailwind CSS</span>
-    </>
-  ),
-  subtitle: (
-    <>
-      <span className="hidden md:inline">
-        <span className="font-semibold underline decoration-primary-600 decoration-wavy decoration-1 underline-offset-2">
-          TailNext
-        </span>{' '}
-        is a production ready template to start your new website using <em>Next.js</em> + <em>Tailwind CSS</em>.
-      </span>{' '}
-      It has been designed following Best Practices, SEO, Accessibility, Dark Mode, great Page Speed, image
-      optimization.
-    </>
-  ),
-  callToAction: {
-    text: 'Get template',
-    href: 'https://github.com/onwidget/tailnext',
-    icon: IconDownload,
-    targetBlank: true,
-  },
-  callToAction2: {
-    text: 'Learn more',
-    href: '/',
-  },
-  image: {
-    src: heroImg,
-    alt: 'Hero TailNext',
-  },
-};
+const logos = [
+  { link: 'https://en.wikipedia.org/wiki/University_of_Gondar', src: mediaUrl('/images/logos/uo_gondar.png'), alt: 'University of Gondar' },
+  { link: 'https://www.haramaya.edu.et', src: mediaUrl('/images/logos/haremaya.png'), alt: 'Haramaya University' },
+  { link: 'https://totalenergies.com/ethiopia', src: mediaUrl('/images/logos/total.webp'), alt: 'Total Energies Ethiopia' },
+  { link: 'https://ddgconstructions.com/', src: mediaUrl('/images/logos/dd.png'), alt: 'Diriba Defersha General Contractor' },
+  { link: 'https://www.developmentaid.org/organizations/view/507840/great-land-motors-engineering-plc', src: mediaUrl('/images/logos/great_land.jpg'), alt: 'Great Land Motors' },
+  { link: 'https://www.developmentaid.org/organizations/view/418699/meserete-kristos-college', src: mediaUrl('/images/logos/meserete.jpg'), alt: 'Meserete Kristos College' },
+];
 
-// SocialProof data on Home page *******************
-export const socialProofHome: SocialProofProps = {
-  id: 'socialProof-on-home',
-  hasBackground: false,
-  images: [
-    {
-      link: 'https://nextjs.org/',
-      src: nextJsLogo,
-      alt: 'NextJs Logo',
-    },
-    {
-      link: 'https://react.dev/',
-      src: reactLogo,
-      alt: 'React Logo',
-    },
-    {
-      link: 'https://tailwindcss.com/',
-      src: tailwindCssLogo,
-      alt: 'Tailwind CSS Logo',
-    },
-    {
-      link: 'https://www.typescriptlang.org/',
-      src: typescriptLogo,
-      alt: 'Typescript Logo',
-    },
-  ],
-};
+const ADDIS_MAP =
+  'https://www.openstreetmap.org/export/embed.html?bbox=38.68%2C8.95%2C38.82%2C9.08&layer=mapnik&marker=9.03%2C38.75';
 
-// Features data on Home page *******************
-export const featuresHome: FeaturesProps = {
-  id: 'features-on-home',
-  hasBackground: false,
-  columns: 3,
-  header: {
-    title: (
-      <>
-        What you get with <span className="whitespace-nowrap">TailNext</span>
-      </>
+export function getHeroHome(locale = 'en'): HeroProps {
+  return {
+    tagline: pick(locale, 'Architecture practice', amCopy.heroTag),
+    title: pick(locale, 'Daniel Assefa Practicing Architecture', amCopy.heroTitle),
+    subtitle: pick(
+      locale,
+      'A design and construction practice creating durable buildings for communities across Ethiopia, from first sketch through supervision and handover.',
+      amCopy.heroSubtitle,
     ),
-    subtitle:
-      "Elevating Your Digital Presence: Discover the Synergies Unleashed in Our Platform's Core Strengths, from Seamless Integration to Open Collaboration.",
-    tagline: 'Features',
-  },
-  items: [
-    {
-      title: 'Next.Js + Tailwind CSS Integration',
-      description:
-        'A seamless integration between two great frameworks that offer high productivity, performance and versatility.',
-      icon: IconBrandTailwind,
-      callToAction: {
-        text: 'Discover now',
-        href: '/',
-      },
+    callToAction: { text: pick(locale, 'View portfolio', amCopy.viewPortfolio), href: '/portfolio' },
+    callToAction2: {
+      text: pick(locale, 'Our services', amCopy.ourServices),
+      href: '/services',
     },
-    {
-      title: 'Ready-to-use Components',
-      description:
-        'Widgets made with Tailwind CSS ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...',
-      icon: IconComponents,
-      callToAction: {
-        text: 'Discover now',
-        href: '/',
-      },
-    },
-    {
-      title: 'Best Practices',
-      description:
-        'By prioritizing maintainability and scalability through coding standards and design principles, your website stays robust and efficient.',
-      icon: IconListCheck,
-      callToAction: {
-        text: 'Discover now',
-        href: '/',
-      },
-    },
-    {
-      title: 'Excellent Page Speed',
-      description:
-        'Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.',
-      icon: IconRocket,
-      callToAction: {
-        text: 'Discover now',
-        href: '/',
-      },
-    },
-    {
-      title: 'Search Engine Optimization (SEO)',
-      description:
-        "Boost online visibility with our SEO-friendly website. Effective strategies and practices enhance your website's search engine ranking, making it easier for users to find your content.",
-      icon: IconArrowsRightLeft,
-      callToAction: {
-        text: 'Discover now',
-        href: '/',
-      },
-    },
-    {
-      title: 'Open to new ideas and contributions',
-      description:
-        'We welcome new ideas and contributions to our platform. Whether you have feature suggestions, want to contribute code, or share insights, our platform is open for collaboration.',
-      icon: IconBulb,
-      callToAction: {
-        text: 'Discover now',
-        href: '/',
-      },
-    },
-  ],
-};
+  };
+}
 
-// Content data on Home page *******************
-export const contentHomeOne: ContentProps = {
-  id: 'contentOne-on-home-one',
-  hasBackground: true,
-  header: {
-    title: 'Aliquip definiebas ad est',
-    subtitle: 'Quando cetero his ne, eum admodum sapientem ut',
-    tagline: 'Content',
-  },
-  content:
-    'Ne dicta praesent ocurreret has, diam theophrastus at pro. Eos etiam regione ut, persius eripuit quo id. Sit te euismod tacimates.',
-  items: [
-    {
-      title: 'Per ei quaeque sensibus',
-      description:
-        'Ex usu illum iudico molestie. Pro ne agam facete mediocritatem, ridens labore facete mea ei. Pro id apeirian dignissim.',
-    },
-    {
-      title: 'Cu imperdiet posidonium sed',
-      description:
-        'Amet utinam aliquando ut mea, malis admodum ocurreret nec et, elit tibique cu nec. Nec ex maluisset inciderint, ex quis.',
-    },
-    {
-      title: 'Nulla omittam sadipscing mel ne',
-      description:
-        'At sed possim oporteat probatus, justo graece ne nec, minim commodo legimus ut vix. Ut eos iudico quando soleat, nam modus.',
-    },
-  ],
-  image: {
-    src: cameraFrontImg,
-    alt: 'Colorful Image',
-  },
-  isReversed: false,
-  isAfterContent: false,
-};
+export function getSocialProofHome(): SocialProofProps {
+  return { id: 'socialProof-on-home', hasBackground: false, images: logos };
+}
 
-// Content data on Home page *******************
-export const contentHomeTwo: ContentProps = {
-  id: 'contentOne-on-home-two',
-  hasBackground: true,
-  content:
-    'Per odio fabellas consulatu cu. Utroque detracto mel ea, quo te latine theophrastus. Ea his tale nib dissentias, mei exerci tamquam euripidis cu.',
-  items: [
-    {
-      title: 'Per ei quaeque sensibus',
+export function getFeaturesHome(locale = 'en'): FeaturesProps {
+  return {
+    id: 'features-on-home',
+    hasBackground: false,
+    columns: 3,
+    header: {
+      tagline: pick(locale, 'Practice', amCopy.featuresTag),
+      title: pick(locale, 'From first sketch to finished building', amCopy.featuresTitle),
+      subtitle: pick(
+        locale,
+        'More than a decade of architecture, urban design, construction supervision, and property administration across Ethiopia.',
+        amCopy.featuresSubtitle,
+      ),
     },
-    {
-      title: 'Cu imperdiet posidonium sed',
-    },
-    {
-      title: 'Nulla omittam sadipscing mel ne',
-    },
-    {
-      title: 'Per ei quaeque sensibus',
-    },
-    {
-      title: 'Cu imperdiet posidonium sed',
-    },
-    {
-      title: 'Nulla omittam sadipscing mel ne',
-    },
-  ],
-  image: {
-    src: cameraBackImg,
-    alt: 'Colorful Image',
-  },
-  isReversed: true,
-  isAfterContent: true,
-};
+    items: [
+      { title: pick(locale, 'Architectural design', amCopy.featDesign), description: pick(locale, 'Functional, beautiful buildings for homes, campuses, churches, and civic life.', amCopy.featDesignDesc) },
+      { title: pick(locale, 'Urban planning', amCopy.featUrban), description: pick(locale, 'Master plans and layouts that balance density, culture, and everyday movement.', amCopy.featUrbanDesc) },
+      { title: pick(locale, 'Construction supervision', amCopy.featSupervision), description: pick(locale, 'Quality, safety, and contract administration from groundbreaking to handover.', amCopy.featSupervisionDesc) },
+      { title: pick(locale, 'Church renovation', amCopy.featChurch), description: pick(locale, 'Careful restoration that protects memory while making worship spaces livable today.', amCopy.featChurchDesc) },
+      { title: pick(locale, 'Property administration', amCopy.featProperty), description: pick(locale, 'Tenant relations, maintenance, and budgeting for residential and commercial assets.', amCopy.featPropertyDesc) },
+      { title: pick(locale, 'Team leadership', amCopy.featTeam), description: pick(locale, 'Mentoring junior architects and coordinating multidisciplinary delivery teams.', amCopy.featTeamDesc) },
+      { title: pick(locale, 'Contract administration', amCopy.featContract), description: pick(locale, 'Clear documents, fair negotiations, and compliance through the life of a project.', amCopy.featContractDesc) },
+      { title: pick(locale, 'Cost estimation', amCopy.featCost), description: pick(locale, 'Practical budgets that keep ambition and construction reality in the same room.', amCopy.featCostDesc) },
+    ],
+  };
+}
 
-// Steps data on Home page *******************
-export const stepsHome: StepsProps = {
-  id: 'steps-on-home',
-  hasBackground: false,
-  isReversed: false,
-  isImageDisplayed: true,
-  image: {
-    src: gasImg,
-    alt: 'Causal workflow from GitHub data to counterfactual analysis',
-  },
-  header: {
-    tagline: 'How it works',
-    title: 'From GitHub data to causal insight',
-    subtitle:
-      'Engineering managers select a project range, connect their delivery history, and move through a guided workflow—from discovering structure in the data to evaluating counterfactuals.',
-  },
-  items: [
-    {
-      title: 'Discovery',
-      description:
-        'Select a date range across your GitHub projects and upload or sync your CSV history. The platform surfaces data-driven DAGs that reflect how variables in your delivery data relate to one another.',
-      icon: IconSearch,
+export function getContentHomeOne(locale = 'en'): ContentProps {
+  return {
+    id: 'contentOne-on-home-one',
+    hasBackground: true,
+    header: {
+      tagline: pick(locale, 'About the practice', amCopy.aboutTag),
+      title: pick(locale, 'Spaces that serve people and place', amCopy.aboutTitle),
     },
-    {
-      title: 'Estimation',
-      description:
-        'Review the candidate DAGs and pick the one that best describes your domain. Run causal estimation to quantify how changes in one factor propagate through the rest of the system.',
-      icon: IconChartBar,
-    },
-    {
-      title: 'Evaluation',
-      description:
-        'Validate the chosen model against your data—check fit, stability, and whether the estimated effects are credible for the decisions you need to make.',
-      icon: IconListCheck,
-    },
-    {
-      title: 'Counterfactual',
-      description:
-        'Explore what-if scenarios: simulate interventions and compare outcomes under different policies or process changes before committing in the real world.',
-      icon: IconArrowsRightLeft,
-    },
-  ],
-};
+    content: pick(
+      locale,
+      'Daniel Assefa Practicing Architecture leads design from first idea to completed building. The studio brings more than ten years of residential, commercial, civic, and sacred work across Ethiopia, with a focus on careful construction, budgeting, and lasting craft.',
+      amCopy.aboutLead,
+    ),
+    items: [
+      { title: pick(locale, '10+ years of practice', amCopy.statYears), description: pick(locale, 'Design, supervision, and administration.', amCopy.statYearsDesc) },
+      { title: pick(locale, '110+ projects', amCopy.statProjects), description: pick(locale, 'Housing, churches, campuses, hospitals, and civic work.', amCopy.statProjectsDesc) },
+      { title: pick(locale, '50+ clients', amCopy.statClients), description: pick(locale, 'Congregations, universities, families, and public agencies.', amCopy.statClientsDesc) },
+    ],
+    image: { src: mediaUrl('/images/church.jpg'), alt: pick(locale, 'Architecture across Ethiopia', 'በኢትዮጵያ ሥነ ሕንፃ') },
+    isReversed: false,
+    isAfterContent: false,
+  };
+}
 
-// Testimonials data on Home page *******************
-export const testimonialsHome: TestimonialsProps = {
-  id: 'testimonials-on-home',
-  hasBackground: true,
-  header: {
-    title: 'What our customers say about us',
-    subtitle:
-      'Etiam sed odio et dolor auctor gravida. Curabitur tincidunt elit non risus pharetra sodales. Etiam sit amet mattis massa.',
-  },
-  testimonials: [
-    {
-      name: 'Tayla Kirsten',
-      job: 'Marketing Manager',
-      testimonial: `I'm impressed by the speed and performance of these templates. My website now loads in the blink of an eye, significantly enhancing my visitors' experience. Thanks to TailNext, my online business is thriving.`,
-      image: {
-        src: 'https://images.unsplash.com/photo-1619734086067-24bf8889ea7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80',
-        alt: 'Tayla Kirsten',
-      },
-      href: '/',
-    },
-    {
-      name: 'Silver Jordan',
-      job: 'Senior Marketer',
-      testimonial: `I had never found it so easy to customize a website. TailNext's templates are incredibly flexible, and with Tailwind CSS, I've managed to give my website the look and feel I always wanted. Highly recommended!`,
-      image: {
-        src: 'https://images.unsplash.com/photo-1565049786474-1dea82a8b995?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80',
-        alt: 'Silver Jordan',
-      },
-      href: '/',
-    },
-    {
-      name: 'Kelsey Arden',
-      job: 'Co-Founder & CEO',
-      testimonial: `As a beginner in web development, I really needed clear guidance. Tailnext made it possible. I was able to install and customize my website seamlessly, and I'm thrilled with the results!`,
-      image: {
-        src: 'https://images.unsplash.com/photo-1659057106920-da022cfbc0cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80',
-        alt: 'Kelsey Arden',
-      },
-      href: '/',
-    },
-    {
-      name: 'Sarah Johnson',
-      job: 'Business Owner',
-      testimonial: `They've not only saved me a ton of time but have also made my websites look incredibly professional. The level of detail and thought that went into designing these templates is truly impressive.`,
-      image: {
-        src: 'https://images.unsplash.com/photo-1572417884940-c24659be6068?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80',
-        alt: 'Sarah Johnson',
-      },
-      href: '/',
-    },
-    {
-      name: 'Keith Young',
-      job: 'Freelance Developer',
-      testimonial: `The clean code and integration with Next.js make my projects a breeze. Plus, the responsive design ensures that my clients' websites look amazing on any device. These templates have become my secret weapon for success!`,
-      image: {
-        src: 'https://images.unsplash.com/photo-1694287877106-ee22f764aef1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80',
-        alt: 'Keith Young',
-      },
-      href: '/',
-    },
-    {
-      name: 'Lisa Gordon',
-      job: 'Project Manager',
-      testimonial: `Their templates are not only stunning but also user-friendly. The support I received from their community has been exceptional. I'm proud to say that I've built my dream website with TailNext.`,
-      image: {
-        src: 'https://images.unsplash.com/photo-1665984867752-6370ab5ae35e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80',
-        alt: 'Lisa Gordon',
-      },
-      href: '/',
-    },
-  ],
-};
+export function getContentHomeTwo(locale = 'en'): ContentProps {
+  return {
+    id: 'contentOne-on-home-two',
+    hasBackground: true,
+    header: { title: pick(locale, 'Design philosophy', amCopy.philosophyTitle) },
+    content: pick(
+      locale,
+      'The practice teaches sustainable design, sits on architectural juries, and studies the quiet details that make a city feel like home. Architecture should inspire, protect, and connect people to their surroundings while respecting the natural world.',
+      amCopy.philosophyLead,
+    ),
+    items: getFeaturedProjects(locale).slice(0, 6).map((project) => ({ title: project.title })),
+    isReversed: true,
+    isAfterContent: true,
+    showConstruction: true,
+  };
+}
 
-// FAQS data on Home page *******************
-export const faqs2Home: FAQsProps = {
-  id: 'faqsTwo-on-home',
-  hasBackground: false,
-  header: {
-    title: 'Frequently Asked Questions',
-    subtitle:
-      'Duis turpis dui, fringilla mattis sem nec, fringilla euismod neque. Morbi tincidunt lacus nec tortor scelerisque pulvinar.',
-    tagline: 'FAQS',
-  },
-  items: [
-    {
-      title: 'What do I need to start?',
-      description: `Nunc mollis tempor quam, non fringilla elit sagittis in. Nullam vitae consectetur mi, a elementum arcu. Sed laoreet, ipsum et vehicula dignissim, leo orci pretium sem, ac condimentum tellus est quis ligula.`,
+export function getStepsHome(locale = 'en'): StepsProps {
+  return {
+    id: 'steps-on-home',
+    hasBackground: false,
+    isReversed: false,
+    isImageDisplayed: true,
+    image: { src: mediaUrl('/images/bole-med.png'), alt: 'Bole Medhanealem Church' },
+    header: {
+      tagline: pick(locale, 'Journey', amCopy.stepsTag),
+      title: pick(locale, 'Education and practice', amCopy.stepsTitle),
+      subtitle: pick(
+        locale,
+        'From Addis Ababa University to leading the practice that became Daniel Assefa Practicing Architecture.',
+        amCopy.stepsSubtitle,
+      ),
     },
-    {
-      title: 'How to install the NextJS + Tailwind CSS template?',
-      description: `Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer eleifend vestibulum nisl in iaculis. Mauris dictum ac purus vestibulum auctor. Praesent imperdiet lectus et massa faucibus, quis viverra massa rhoncus.`,
-    },
-    {
-      title: "What's something that you completely don't understand?",
-      description: `Mauris vitae eros a dui varius luctus. Suspendisse rutrum, sapien nec blandit bibendum, justo sapien sollicitudin erat, id aliquam sapien purus quis leo. Aliquam vulputate vestibulum consectetur.`,
-    },
-    {
-      title: "What's an example of when you changed your mind?",
-      description: `Nunc dapibus lacinia ipsum ut elementum. Integer in pretium sapien. Ut pretium nisl mauris, ut rutrum justo condimentum id. Etiam aliquet, arcu at iaculis laoreet, est arcu egestas sapien, eget sollicitudin odio orci et nunc.`,
-    },
-    {
-      title: 'What is something that you would really like to try again?',
-      description: `Duis in maximus mauris, id eleifend mauris. Nam a fringilla arcu. Curabitur convallis, tellus non aliquet rhoncus, lacus massa auctor eros, in interdum lectus augue sed augue. Fusce tempor ex id faucibus efficitur.`,
-    },
-    {
-      title: 'If you could only ask one question to each person you meet, what would that question be?',
-      description: `Nullam imperdiet sapien tincidunt erat dapibus faucibus. Vestibulum a sem nec lorem imperdiet scelerisque non sed lacus. Ut pulvinar id diam vitae auctor. Nam tempus, neque et elementum consectetur, ex ipsum pulvinar risus, vel sodales ligula tortor eu eros.`,
-    },
-  ],
-};
+    items: [
+      { title: pick(locale, 'B.Sc. Architecture and Urban Planning', amCopy.step1), description: pick(locale, 'Addis Ababa University, 1988.', amCopy.step1Desc) },
+      { title: pick(locale, 'Project Architect, Ministry of Planning', amCopy.step2), description: pick(locale, '1988-1993. Blueprints, regulations, and multidisciplinary master plans.', amCopy.step2Desc) },
+      { title: pick(locale, 'Architect and Property Administrator, Ayat', amCopy.step3), description: pick(locale, '1993-1997. Tenant relations and maintenance for 100+ residential units.', amCopy.step3Desc) },
+      { title: pick(locale, 'M.A. Environmental Planning and Landscape Design', amCopy.step4), description: pick(locale, 'Addis Ababa University, 2015.', amCopy.step4Desc) },
+      { title: pick(locale, 'Senior Architect and Manager', amCopy.step5), description: pick(locale, 'Daniel Assefa Building Consultant PLC, 1998-2024. 67 blueprints, four church renovations, and a team of eight junior architects.', amCopy.step5Desc) },
+    ],
+  };
+}
 
-// Pricing data on Home page *******************
-export const pricingHome: PricingProps = {
-  id: 'pricing-on-home',
-  hasBackground: true,
-  header: {
-    title: 'Prices for each plan',
-    subtitle:
-      'Proin eget vestibulum sem, vel ultrices ligula. Vestibulum in eleifend lectus, non mollis odio. Donec nibh ipsum, suscipit non pulvinar quis, lobortis ac lorem.',
-    // tagline: 'Pricing',
-  },
-  prices: [
-    {
-      title: 'basic',
-      price: 29,
-      period: 'per month',
-      items: [
-        {
-          description: 'Etiam in libero, et volutpat',
-        },
-        {
-          description: 'Aenean ac nunc dolor tristique',
-        },
-        {
-          description: 'Cras scelerisque accumsan lib',
-        },
-        {
-          description: 'In hac habitasse',
-        },
-      ],
-      callToAction: {
-        targetBlank: true,
-        text: 'Free 7-day trial',
-        href: '/',
-      },
-      hasRibbon: false,
+export function getFaqs2Home(locale = 'en'): FAQsProps {
+  return {
+    id: 'faqsTwo-on-home',
+    hasBackground: false,
+    header: {
+      tagline: pick(locale, 'FAQs', amCopy.faqsTag),
+      title: pick(locale, 'Questions clients usually ask', amCopy.faqsTitle),
     },
-    {
-      title: 'standard',
-      price: 69,
-      period: 'per month',
-      items: [
-        {
-          description: 'Proin vel laoreet',
-        },
-        {
-          description: 'Ut efficitur egestas',
-        },
-        {
-          description: 'Pellentesque ut nibh',
-        },
-        {
-          description: 'Donec fringilla sem',
-        },
-      ],
-      callToAction: {
-        targetBlank: true,
-        text: 'Free 15-day trial',
-        href: '/',
-      },
-      hasRibbon: true,
-      ribbonTitle: 'Popular',
-    },
-    {
-      title: 'premium',
-      price: 199,
-      period: 'per month',
-      items: [
-        {
-          description: 'Curabitur suscipit risus',
-        },
-        {
-          description: 'Aliquam blandit malesuada',
-        },
-        {
-          description: 'Suspendisse sit amet',
-        },
-        {
-          description: 'Suspendisse auctor dui',
-        },
-      ],
-      callToAction: {
-        targetBlank: true,
-        text: 'Free 30-day trial',
-        href: '/',
-      },
-      hasRibbon: false,
-    },
-  ],
-};
+    items: [
+      { title: pick(locale, 'Where is the studio?', amCopy.faqWhere), description: pick(locale, 'Daniel Assefa Practicing Architecture is based in Addis Ababa, Ethiopia, and works on projects across the country.', amCopy.faqWhereAns) },
+      { title: pick(locale, 'What kinds of buildings do you take on?', amCopy.faqTypes), description: pick(locale, 'Housing, churches, schools, hospitals, mixed-use, hotels, and civic buildings, from first sketch through supervision.', amCopy.faqTypesAns) },
+      { title: pick(locale, 'Are you a registered practice?', amCopy.faqReg), description: pick(locale, 'Yes. Registered Architect and Professional Member of the Ethiopian Association of Architects, certified by the Ethiopian Engineering Council, and CPD accredited.', amCopy.faqRegAns) },
+      { title: pick(locale, 'How do we start a conversation?', amCopy.faqStart), description: pick(locale, 'Write to danassgebbal12@gmail.com or call +1 (437) 833-2850. A short brief and site notes are enough to begin.', amCopy.faqStartAns) },
+    ],
+  };
+}
 
-// Team data on Home page *******************
-export const teamHome: TeamProps = {
-  id: 'team-on-home',
-  hasBackground: false,
-  header: {
-    title: 'Team Members',
-    subtitle:
-      'Suspendisse in dui nibh. Donec enim leo, sodales et egestas id, malesuada non diam. Sed dapibus velit et mauris condimentum, vel imperdiet erat egestas.',
-    // tagline: 'Team',
-  },
-  teams: [
-    {
-      name: 'Cindy Belcher',
-      occupation: 'SEO Consultant',
-      image: {
-        src: 'https://images.unsplash.com/photo-1637858868799-7f26a0640eb6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80',
-        alt: 'Cindy Belcher',
-      },
-      items: [
-        {
-          title: 'Know more on Twitter',
-          icon: IconBrandTwitter,
-          href: '#',
-        },
-        {
-          title: 'Know more on Linkedin',
-          icon: IconBrandLinkedin,
-          href: '#',
-        },
-        {
-          title: 'Contact by email',
-          icon: IconMail,
-          href: '#',
-        },
-      ],
+export function getContactHome(locale = 'en'): ContactProps {
+  return {
+    hasBackground: true,
+    header: {
+      tagline: pick(locale, 'Contact', amCopy.contactTag),
+      title: pick(locale, 'Visit the practice', amCopy.contactTitle),
+      subtitle: pick(locale, 'Addis Ababa, Ethiopia, open to new commissions.', amCopy.contactSubtitle),
     },
-    {
-      name: 'Toby Foster',
-      occupation: 'Marketing Tech',
-      image: {
-        src: 'https://images.unsplash.com/photo-1614583224978-f05ce51ef5fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2172&q=80',
-        alt: 'Toby Foster',
-      },
-      items: [
-        {
-          title: 'Know more on Twitter',
-          icon: IconBrandTwitter,
-          href: '#',
-        },
-        {
-          title: 'Know more on Linkedin',
-          icon: IconBrandLinkedin,
-          href: '#',
-        },
-        {
-          title: 'Contact by email',
-          icon: IconMail,
-          href: '#',
-        },
-      ],
-    },
-    {
-      name: 'Clark Bourne',
-      occupation: 'Content Manager',
-      image: {
-        src: 'https://images.unsplash.com/photo-1639628735078-ed2f038a193e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80',
-        alt: 'Clark Bourne',
-      },
-      items: [
-        {
-          title: 'Know more on Twitter',
-          icon: IconBrandTwitter,
-          href: '#',
-        },
-        {
-          title: 'Know more on Linkedin',
-          icon: IconBrandLinkedin,
-          href: '#',
-        },
-        {
-          title: 'Contact by email',
-          icon: IconMail,
-          href: '#',
-        },
-      ],
-    },
-    {
-      name: 'Bella Chase',
-      occupation: 'UX Designer',
-      image: {
-        src: 'https://images.unsplash.com/photo-1628260412297-a3377e45006f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80',
-        alt: 'Bella Chase',
-      },
-      items: [
-        {
-          title: 'Know more on Twitter',
-          icon: IconBrandTwitter,
-          href: '#',
-        },
-        {
-          title: 'Know more on Linkedin',
-          icon: IconBrandLinkedin,
-          href: '#',
-        },
-        {
-          title: 'Contact by email',
-          icon: IconMail,
-          href: '#',
-        },
-      ],
-    },
-  ],
-};
+    content: pick(locale, 'Find the studio on the map, or reach us directly by phone or email.', amCopy.contactLead),
+    items: [
+      { title: pick(locale, 'Studio', amCopy.studio), description: ['Addis Ababa, Ethiopia'], icon: IconMapPin },
+      { title: pick(locale, 'Contact', amCopy.headerContact), description: ['+1 (437) 833-2850', 'danassgebbal12@gmail.com'], icon: IconPhoneCall },
+      { title: pick(locale, 'Hours', amCopy.hours), description: [pick(locale, 'By appointment', amCopy.hoursByAppt), pick(locale, 'Open to new commissions', amCopy.hoursOpen)], icon: IconClock },
+    ],
+    mapEmbedUrl: ADDIS_MAP,
+    mapTitle: pick(locale, 'Addis Ababa studio location', amCopy.mapTitle),
+  };
+}
 
-// Contact data on Home page *******************
-export const contactHome: ContactProps = {
-  hasBackground: true,
-  header: {
-    title: 'Get in Touch',
-    subtitle: 'In hac habitasse platea dictumst',
-    tagline: 'Contact',
-  },
-  content:
-    'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis nec ipsum orci. Ut scelerisque sagittis ante, ac tincidunt sem venenatis ut.',
-  items: [
-    {
-      title: 'Our Address',
-      description: ['1230 Maecenas Street Donec Road', 'New York, EEUU'],
-      icon: IconMapPin,
-    },
-    {
-      title: 'Contact',
-      description: ['Mobile: +1 (123) 456-7890', 'Mail: tailnext@gmail.com'],
-      icon: IconPhoneCall,
-    },
-    {
-      title: 'Working hours',
-      description: ['Monday - Friday: 08:00 - 17:00', 'Saturday & Sunday: 08:00 - 12:00'],
-      icon: IconClock,
-    },
-  ],
-  form: {
-    title: 'Ready to Get Started?',
-    inputs: [
+export function getCallToAction2Home(locale = 'en'): CallToActionProps {
+  return {
+    title: pick(locale, 'Bring a vision into the world', amCopy.ctaTitle),
+    subtitle: pick(
+      locale,
+      'Whether you need a church restored, a campus library, or a careful house, the practice is ready to hear the story of the place.',
+      amCopy.ctaSubtitle,
+    ),
+    callToAction: { text: pick(locale, 'Contact the studio', amCopy.ctaContact), href: '/contact', icon: IconMail },
+    items: [
+      { title: pick(locale, 'Portfolio', amCopy.headerPortfolio), description: pick(locale, 'Built and designed works across Ethiopia.', amCopy.ctaPortfolioDesc), href: '/portfolio' },
+      { title: pick(locale, 'Resume', amCopy.downloadResume), description: pick(locale, 'Download the principal architect CV as PDF.', amCopy.ctaResumeDesc), href: mediaUrl('/images/Daniel-Gebre-Resume.pdf') },
       {
-        type: 'text',
-        name: 'name',
-        autocomplete: 'off',
-        placeholder: 'Your name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        autocomplete: 'on',
-        placeholder: 'Your email address',
+        title: pick(locale, 'Email', amCopy.ctaEmail),
+        description: pick(locale, 'Send a brief and we will reply from the studio.', amCopy.ctaEmailDesc),
+        href: 'mailto:danassgebbal12@gmail.com',
       },
     ],
-    textarea: {
-      cols: 30,
-      rows: 5,
-      name: 'textarea',
-      placeholder: 'Write your message...',
-    },
-    btn: {
-      title: 'Send Message',
-      type: 'submit',
-    },
-  },
-};
+  };
+}
 
-// CallToAction data *******************
-export const callToAction2Home: CallToActionProps = {
-  title: 'Next.js + Tailwind CSS',
-  subtitle:
-    'Aliquam sodales porttitor lacus ac tristique. Etiam posuere elit at leo feugiat sodales. Sed ac mauris quis sem tempor condimentum non at metus.',
-  callToAction: {
-    text: 'Get template',
-    href: 'https://github.com/onwidget/tailnext',
-    icon: IconDownload,
-  },
-  items: [
-    {
-      title: 'Get template',
-      description: 'Aliquam sodales est lectus, quis.',
-      href: 'https://github.com/onwidget/tailnext',
+export function getCertificationsHome(locale = 'en'): FeaturesProps & { callToAction: { text: string; href: string } } {
+  return {
+    id: 'certifications-on-home',
+    hasBackground: true,
+    header: {
+      tagline: pick(locale, 'Credentials', amCopy.certsTag),
+      title: pick(locale, 'Certifications & Recognitions', amCopy.certsTitle),
+      subtitle: pick(
+        locale,
+        'A registered architectural practice serving clients across Ethiopia.',
+        amCopy.certsSubtitle,
+      ),
     },
-    {
-      title: 'Learn more',
-      description: 'Class aptent taciti sociosqu ad litora torquent per conubia.',
-      href: '/',
-    },
-    {
-      title: 'Subscribe',
-      description: 'Morbi orci nunc, euismod ac dui id, convallis.',
-      form: {
-        icon: IconMail,
-        input: {
-          type: 'email',
-          name: 'email',
-          autocomplete: 'email',
-          placeholder: 'Enter your email address',
-        },
-        btn: {
-          title: 'Subscribe',
-          type: 'submit',
-        },
+    items: [
+      {
+        title: pick(locale, 'Registered Architect', amCopy.certRegistered),
+        description: pick(locale, 'Ethiopian Association of Architects (EAA)', amCopy.certRegisteredOrg),
       },
+      {
+        title: pick(locale, 'Professional Member', amCopy.certMember),
+        description: pick(locale, 'Ethiopian Association of Architects (EAA)', amCopy.certMemberOrg),
+      },
+      {
+        title: pick(locale, 'Certified Engineer', amCopy.certEngineer),
+        description: pick(locale, 'Ethiopian Engineering Council', amCopy.certEngineerOrg),
+      },
+      {
+        title: pick(locale, 'CPD Accredited', amCopy.certCpd),
+        description: pick(locale, 'EAA Continuing Professional Development', amCopy.certCpdOrg),
+      },
+    ],
+    callToAction: {
+      text: pick(locale, 'View portfolio', amCopy.viewPortfolio),
+      href: '/portfolio',
     },
-  ],
-};
+  };
+}
+
+export const heroHome = getHeroHome('en');
+export const socialProofHome = getSocialProofHome();
+export const featuresHome = getFeaturesHome('en');
+export const contentHomeOne = getContentHomeOne('en');
+export const contentHomeTwo = getContentHomeTwo('en');
+export const stepsHome = getStepsHome('en');
+export const faqs2Home = getFaqs2Home('en');
+export const contactHome = getContactHome('en');
+export const callToAction2Home = getCallToAction2Home('en');
+export const certificationsHome = getCertificationsHome('en');
+export const pricingHome = { id: 'pricing-on-home', hasBackground: true, header: { title: '' }, prices: [] };
+export const teamHome = { id: 'team-on-home', hasBackground: false, header: { title: '' }, teams: [] };
+export const testimonialsHome = { id: 'testimonials-on-home', hasBackground: true, header: { title: '' }, testimonials: [] };

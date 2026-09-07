@@ -43,9 +43,11 @@ const Steps = ({
               width={400}
               height={768}
               alt={image.alt}
-              placeholder="blur"
+              {...(typeof image.src === 'object' ? { placeholder: 'blur' as const } : {})}
               className="inset-0 object-cover object-top w-full rounded-md shadow-lg md:absolute md:h-full bg-gray-400 dark:bg-slate-700"
               quality={50}
+              loading="lazy"
+              decoding="async"
             />
           )}
         </div>

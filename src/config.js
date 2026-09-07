@@ -1,10 +1,11 @@
 export const SITE = {
-  name: 'TailNext',
+  name: 'Daniel Assefa Practicing Architecture',
 
-  origin: 'https://tailnext.vercel.app',
+  origin: 'https://danielassefa.com',
   basePathname: '/',
   trailingSlash: false,
 
-  title: 'TailNext — Your website with Next.js + Tailwind CSS',
-  description: 'TailNext is a free and ready to start template to make your website using Next.js and Tailwind CSS.',
+  title: 'Daniel Assefa Practicing Architecture',
+  description:
+    'Daniel Assefa Practicing Architecture designs and supervises durable buildings across Ethiopia, housing, churches, campuses, and civic work shaped by place and craft.',
 };

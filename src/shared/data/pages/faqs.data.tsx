@@ -1,130 +1,100 @@
-import { CallToActionProps, FAQsProps } from '~/shared/types';
-import { HeroProps } from '~/shared/types';
+import { CallToActionProps, FAQsProps, HeroProps } from '~/shared/types';
+import amCopy from '../copy-am.json';
+import { pick } from '../locale';
 
-// Hero data on FAQs page *******************
-export const heroFaqs: HeroProps = {
-  title: 'Frequently Asked Questions',
-  subtitle: (
-    <>
-      <span className="hidden md:inline">
-        {`Whether you need help using our Next.js and Tailwind CSS templates, solving problems, or just want some useful tips, our FAQs are here to assist you.`}
-      </span>{' '}
-      Explore them to optimize your experience with our website and products.
-    </>
-  ),
-  tagline: 'Demo FAQs Page',
-};
+export function getHeroFaqs(locale = 'en'): HeroProps {
+  return {
+    title: pick(locale, 'Frequently Asked Questions', amCopy.faqsPageTitle),
+    subtitle: pick(
+      locale,
+      'Clear answers about the practice, our services, and the Addis Ababa studio.',
+      amCopy.faqsPageSubtitle,
+    ),
+    tagline: pick(locale, 'FAQs', amCopy.faqsTag),
+  };
+}
 
-// FAQS4 data on FAQs page *******************
-export const faqs4Faqs: FAQsProps = {
-  id: 'faqsFour-on-faqs',
-  hasBackground: true,
-  header: {
-    title: 'Find what you need',
-    subtitle: 'Get quick answers to your questions: Everything you need in one spot.',
-    position: 'center',
-  },
-  tabs: [
-    {
-      link: {
-        label: 'General',
-        href: '/tab1',
-      },
-      items: [
-        {
-          title: 'What do I need to start?',
-          description: `Nunc mollis tempor quam, non fringilla elit sagittis in. Nullam vitae consectetur mi, a elementum arcu. Sed laoreet, ipsum et vehicula dignissim, leo orci pretium sem, ac condimentum tellus est quis ligula.`,
-        },
-        {
-          title: 'How to install the NextJS + Tailwind CSS template?',
-          description: `Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer eleifend vestibulum nisl in iaculis. Mauris dictum ac purus vestibulum auctor. Praesent imperdiet lectus et massa faucibus, quis viverra massa rhoncus.`,
-        },
-        {
-          title: "What's something that you completely don't understand?",
-          description: `Mauris vitae eros a dui varius luctus. Suspendisse rutrum, sapien nec blandit bibendum, justo sapien sollicitudin erat, id aliquam sapien purus quis leo. Aliquam vulputate vestibulum consectetur.`,
-        },
-        {
-          title: "What's an example of when you changed your mind?",
-          description: `Nunc dapibus lacinia ipsum ut elementum. Integer in pretium sapien. Ut pretium nisl mauris, ut rutrum justo condimentum id. Etiam aliquet, arcu at iaculis laoreet, est arcu egestas sapien, eget sollicitudin odio orci et nunc.`,
-        },
-        {
-          title: 'What is something that you would really like to try again?',
-          description: `Duis in maximus mauris, id eleifend mauris. Nam a fringilla arcu. Curabitur convallis, tellus non aliquet rhoncus, lacus massa auctor eros, in interdum lectus augue sed augue. Fusce tempor ex id faucibus efficitur.`,
-        },
-        {
-          title: 'If you could only ask one question to each person you meet, what would that question be?',
-          description: `Nullam imperdiet sapien tincidunt erat dapibus faucibus. Vestibulum a sem nec lorem imperdiet scelerisque non sed lacus. Ut pulvinar id diam vitae auctor. Nam tempus, neque et elementum consectetur, ex ipsum pulvinar risus, vel sodales ligula tortor eu eros.`,
-        },
-      ],
+export function getFaqs4Faqs(locale = 'en'): FAQsProps {
+  return {
+    id: 'faqsFour-on-faqs',
+    hasBackground: true,
+    header: {
+      title: pick(locale, 'Find what you need', amCopy.faqsTitle),
+      subtitle: pick(
+        locale,
+        'Common questions from clients planning buildings across Ethiopia.',
+        'በኢትዮጵያ ሕንፃ የሚያቅዱ ደንበኞች የሚጠይቋቸው ጥያቄዎች።',
+      ),
+      position: 'center',
     },
-    {
-      link: {
-        label: 'Plans, prices and payments',
-        href: '/tab2',
+    items: [
+      {
+        title: pick(locale, 'Where is the studio?', amCopy.faqWhere),
+        description: pick(
+          locale,
+          'Daniel Assefa Practicing Architecture is based in Addis Ababa, Ethiopia, and works on projects across the country.',
+          amCopy.faqWhereAns,
+        ),
       },
-      items: [
-        {
-          title: 'Which plan is best for me?',
-          description: `Nunc mollis tempor quam, non fringilla elit sagittis in. Nullam vitae consectetur mi, a elementum arcu. Sed laoreet, ipsum et vehicula dignissim, leo orci pretium sem, ac condimentum tellus est quis ligula.`,
-        },
-        {
-          title: 'What are my payment options?',
-          description: `Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer eleifend vestibulum nisl in iaculis. Mauris dictum ac purus vestibulum auctor. Praesent imperdiet lectus et massa faucibus, quis viverra massa rhoncus.`,
-        },
-        {
-          title: 'How do I change my plan to a different one?',
-          description: `Mauris vitae eros a dui varius luctus. Suspendisse rutrum, sapien nec blandit bibendum, justo sapien sollicitudin erat, id aliquam sapien purus quis leo. Aliquam vulputate vestibulum consectetur.`,
-        },
-        {
-          title: 'What happen at the end of my free trial?',
-          description: `Nunc dapibus lacinia ipsum ut elementum. Integer in pretium sapien. Ut pretium nisl mauris, ut rutrum justo condimentum id. Etiam aliquet, arcu at iaculis laoreet, est arcu egestas sapien, eget sollicitudin odio orci et nunc.`,
-        },
-        {
-          title: 'Can I import data from other tools?',
-          description: `Duis in maximus mauris, id eleifend mauris. Nam a fringilla arcu. Curabitur convallis, tellus non aliquet rhoncus, lacus massa auctor eros, in interdum lectus augue sed augue. Fusce tempor ex id faucibus efficitur.`,
-        },
-        {
-          title: 'Can I cancel my plan at any time?',
-          description: `Nullam imperdiet sapien tincidunt erat dapibus faucibus. Vestibulum a sem nec lorem imperdiet scelerisque non sed lacus. Ut pulvinar id diam vitae auctor. Nam tempus, neque et elementum consectetur, ex ipsum pulvinar risus, vel sodales ligula tortor eu eros.`,
-        },
-      ],
-    },
-    {
-      link: {
-        label: 'Others',
-        href: '/tab3',
+      {
+        title: pick(locale, 'What kinds of buildings do you take on?', amCopy.faqTypes),
+        description: pick(
+          locale,
+          'Housing, churches, schools, hospitals, mixed-use, hotels, and civic buildings, from first sketch through supervision.',
+          amCopy.faqTypesAns,
+        ),
       },
-      items: [
-        {
-          title: 'How do I download the template?',
-          description: `In ullamcorper pellentesque ante, nec commodo ex euismod viverra. Phasellus facilisis, justo a bibendum pellentesque, nibh est egestas lectus, volutpat ullamcorper arcu ante ac dolor.`,
-        },
-        {
-          title: 'How do I customize the template?',
-          description: `Pellentesque semper euismod malesuada. Curabitur quis lectus tortor. Aliquam efficitur pretium tellus, ut sagittis turpis dignissim eget. Etiam scelerisque nec risus eget iaculis. Nunc maximus metus id felis dapibus, sed ullamcorper sapien faucibus.`,
-        },
-        {
-          title: 'Does the template come with any tutorials or instructions?',
-          description: `Sed sagittis arcu suscipit auctor suscipit. Nam dapibus risus vitae tristique fermentum. In egestas turpis elit, id gravida diam dictum eu. Ut dictum libero ut rhoncus egestas. Ut sit amet tortor blandit, faucibus tellus vitae, consequat purus. Nullam id odio enim.`,
-        },
-        {
-          title: 'Are there any additional fees or charges for using the template?',
-          description: `Fusce efficitur, augue et vulputate pharetra, augue turpis viverra turpis, id tempor purus eros sed erat. Curabitur blandit eget sem vitae malesuada.`,
-        },
-      ],
-    },
-  ],
-};
+      {
+        title: pick(locale, 'Are you a registered practice?', amCopy.faqReg),
+        description: pick(
+          locale,
+          'Yes. Registered Architect and Professional Member of the Ethiopian Association of Architects, certified by the Ethiopian Engineering Council, and CPD accredited.',
+          amCopy.faqRegAns,
+        ),
+      },
+      {
+        title: pick(locale, 'How do we start a conversation?', amCopy.faqStart),
+        description: pick(
+          locale,
+          'Write to danassgebbal12@gmail.com or call +1 (437) 833-2850. A short brief and site notes are enough to begin.',
+          amCopy.faqStartAns,
+        ),
+      },
+      {
+        title: pick(locale, 'Do you supervise construction?', amCopy.featSupervision),
+        description: pick(
+          locale,
+          'Yes. Quality, safety, and contract administration from groundbreaking to handover are core services of the practice.',
+          amCopy.featSupervisionDesc,
+        ),
+      },
+      {
+        title: pick(locale, 'Can you renovate churches?', amCopy.featChurch),
+        description: pick(
+          locale,
+          'Yes. Careful restoration that protects memory while making worship spaces livable today.',
+          amCopy.featChurchDesc,
+        ),
+      },
+    ],
+  };
+}
 
-// CallToAction data on FAQs page *******************
-export const callToActionFaqs: CallToActionProps = {
-  id: 'callToAction-on-faqs',
-  hasBackground: true,
-  title: 'Still have questions?',
-  subtitle:
-    'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut in leo odio. Cras finibus ex a ante convallis ullamcorper.',
-  callToAction: {
-    text: 'Contact us',
-    href: '/contact',
-  },
-};
+export function getCallToActionFaqs(locale = 'en'): CallToActionProps {
+  return {
+    title: pick(locale, 'Still have a question?', 'ጥያቄ አለዎት?'),
+    subtitle: pick(
+      locale,
+      'Reach the Addis Ababa studio by email or phone. We are glad to discuss the next project.',
+      amCopy.contactLead,
+    ),
+    callToAction: {
+      text: pick(locale, 'Contact the studio', amCopy.contactStudio),
+      href: '/contact',
+    },
+  };
+}
+
+export const heroFaqs = getHeroFaqs('en');
+export const faqs4Faqs = getFaqs4Faqs('en');
+export const callToActionFaqs = getCallToActionFaqs('en');

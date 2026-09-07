@@ -1,22 +1,22 @@
 import type { Metadata } from 'next';
 
-import Contact2 from '~/components/widgets/Contact2';
+import EthiopiaMap from '~/components/widgets/EthiopiaMap';
 import Features2 from '~/components/widgets/Features2';
 import Hero from '~/components/widgets/Hero';
-import { heroContact, contact2Contact, features2Contact } from '~/shared/data/pages/contact.data';
+import { getContactDetails, getFeatures2Contact, getHeroContact } from '~/shared/data/pages/contact.data';
 
 export const metadata: Metadata = {
-  title: 'Contact us',
+  title: 'Contact',
 };
 
-const Page = () => {
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+
   return (
     <>
-      <Hero {...heroContact} />
-      <Contact2 {...contact2Contact} />
-      <Features2 {...features2Contact} />
+      <Hero {...getHeroContact(locale)} />
+      <EthiopiaMap {...getContactDetails(locale)} />
+      <Features2 {...getFeatures2Contact(locale)} />
     </>
   );
-};
-
-export default Page;
+}

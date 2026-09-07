@@ -13,7 +13,7 @@ For the purposes of these Terms and Conditions:
 - **Country** refers to Ethiopia.
 - **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Daniel Assefa Practicing Architecture, Addis Ababa, Ethiopia.
 - **Service** refers to this Website.
-- **Website** refers to the Daniel Assefa Practicing Architecture site, accessible from [https://danielassefa.com](https://danielassefa.com).
+- **Website** refers to the Daniel Assefa Practicing Architecture site, accessible from [https://danielassefa.org](https://danielassefa.org).
 - **You** means the individual accessing or using the Service, or the company or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.
 
 ## Acknowledgment

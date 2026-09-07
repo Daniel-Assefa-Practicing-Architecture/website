@@ -2,7 +2,7 @@
 
 Next.js, Tailwind, and English / Amharic via `next-intl`.
 
-Live site: `https://danielgebre.net`
+Live site: `https://danielassefa.org`
 
 Local URLs: `http://localhost:3000/en` and `http://localhost:3000/am`.
 
@@ -90,9 +90,9 @@ The server must have been set up using the server setup guide (`server_setup_gui
 **1. Create the site directory and .env on the server:**
 
 ```bash
-sudo mkdir -p /var/www/robera_website/logs
-sudo chown -R deployer:deployer /var/www/robera_website
-sudo nano /var/www/robera_website/.env
+sudo mkdir -p /var/www/daniel_website/logs
+sudo chown -R deployer:deployer /var/www/daniel_website
+sudo nano /var/www/daniel_website/.env
 ```
 
 `.env` contents:
@@ -102,23 +102,23 @@ sudo nano /var/www/robera_website/.env
 PORT=3000
 HOSTNAME=0.0.0.0
 # public URL is fine as the site URL, not the listen port
-URL=https://robera.net
+URL=https://danielassefa.org
 ```
 
 **2. Create the NGINX virtual host config:**
 
 ```bash
-sudo nano /etc/nginx/sites-available/robera_website
+sudo nano /etc/nginx/sites-available/daniel_website
 ```
 
 ```nginx
 server {
     listen 80;
     listen [::]:80;
-    server_name robera.net www.robera.net;
+    server_name danielassefa.org www.danielassefa.org;
 
-    access_log /var/log/nginx/robera_website.access.log;
-    error_log  /var/log/nginx/robera_website.error.log;
+    access_log /var/log/nginx/daniel_website.access.log;
+    error_log  /var/log/nginx/daniel_website.error.log;
 
     location / {
         proxy_pass http://127.0.0.1:4719;
@@ -140,7 +140,7 @@ The browser fails because it uses **HTTPS**, and Cloudflare HTTPS still returns 
 
 | **Path**                               | **Result** |
 | -------------------------------------- | ---------- |
-| `http://127.0.0.1` + Host `robera.net` | 200        |
+| `http://127.0.0.1` + Host `danielassefa.org` | 200        |
 | Origin `http://91.7.243.80`            | 200        |
 | Cloudflare **HTTP**                    | 200        |
 | Cloudflare **HTTPS**                   | **520**    |
@@ -149,7 +149,7 @@ The browser fails because it uses **HTTPS**, and Cloudflare HTTPS still returns 
 
 ```nginx
 sudo nginx -t && sudo systemctl reload nginx
-curl -I -H 'Host: robera.net' http://127.0.0.1/en
+curl -I -H 'Host: danielassefa.org' http://127.0.0.1/en
 ```
 
 **3. Issue TLS certificate:**
@@ -158,7 +158,7 @@ Your DNS A record must point to the server's public IP before this step.
 
 ```bash
 sudo apt install certbot python3-certbot-nginx   # Debian/Ubuntu
-sudo certbot --nginx -d robera.net -d www.robera.net
+sudo certbot --nginx -d danielassefa.org -d www.danielassefa.org
 sudo certbot renew --dry-run
 ```
 
@@ -166,10 +166,10 @@ This will create the following:
 
 ```nginx
 server {
-    server_name robera.net www.robera.net;
+    server_name danielassefa.org www.danielassefa.org;
 
-    access_log /var/log/nginx/robera_website.access.log;
-    error_log  /var/log/nginx/robera_website.error.log;
+    access_log /var/log/nginx/daniel_website.access.log;
+    error_log  /var/log/nginx/daniel_website.error.log;
 
     location / {
         proxy_pass http://127.0.0.1:4719;
@@ -184,27 +184,27 @@ server {
 
     listen [::]:443 ssl ipv6only=on; # managed by Certbot
     listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/robera.net/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/robera.net/privkey.pem; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/danielassefa.org/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/danielassefa.org/privkey.pem; # managed by Certbot
     include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
 
 }
 server {
-    if ($host = www.robera.net) {
+    if ($host = www.danielassefa.org) {
         return 301 https://$host$request_uri;
     } # managed by Certbot
 
 
-    if ($host = robera.net) {
+    if ($host = danielassefa.org) {
         return 301 https://$host$request_uri;
     } # managed by Certbot
 
 
     listen 80;
     listen [::]:80;
-    server_name robera.net www.robera.net;
+    server_name danielassefa.org www.danielassefa.org;
     return 404; # managed by Certbot
 
 }              
@@ -213,7 +213,7 @@ server {
 This must be done before the next step to generate the certificate.
 
 ```nginx
-sudo nano /etc/nginx/snippets/robera_website_security.conf
+sudo nano /etc/nginx/snippets/daniel_website_security.conf
 ```
 
 Then test and reload:
@@ -239,7 +239,7 @@ if ($host = "") {
 }
 
 # ── Block wrong Host header (direct IP access, other domains) ──────
-# Only robera.net and www.robera.net should reach this server.
+# Only danielassefa.org and www.danielassefa.org should reach this server.
 if ($host !~* "^(robera\.net|www\.robera\.net)$") {
     return 444;
 }
@@ -276,7 +276,7 @@ sudo systemctl reload nginx
 ### Next step
 
 ```nginx
-sudo nano /etc/nginx/sites-available/robera_website
+sudo nano /etc/nginx/sites-available/daniel_website
 ```
 
 then
@@ -286,7 +286,7 @@ then
 server {
     listen 80;
     listen [::]:80;
-    server_name robera.net www.robera.net;
+    server_name danielassefa.org www.danielassefa.org;
 
     return 301 https://$host$request_uri;
 }
@@ -295,17 +295,17 @@ server {
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
-    server_name robera.net www.robera.net;
+    server_name danielassefa.org www.danielassefa.org;
 
-    ssl_certificate     /etc/letsencrypt/live/robera.net/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/robera.net/privkey.pem;
+    ssl_certificate     /etc/letsencrypt/live/danielassefa.org/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/danielassefa.org/privkey.pem;
 
     # TLS settings inherited from nginx.conf — no need to repeat them here.
     # The ssl_protocols/ssl_ciphers in nginx.conf already apply globally.
 
     # ── Logging ────────────────────────────────────────────────────
-    access_log /var/log/nginx/robera_website.access.log;
-    error_log  /var/log/nginx/robera_website.error.log;
+    access_log /var/log/nginx/daniel_website.access.log;
+    error_log  /var/log/nginx/daniel_website.error.log;
 
     # ── Probe path blocking — silent drop (444) ────────────────────
     # Return nothing for common scanner targets.
@@ -318,7 +318,7 @@ server {
     limit_req zone=general burst=50 nodelay;
 
     # ── Security rules (next-action block, host check, etc.) ───────
-    include snippets/robera_website_security.conf;
+    include snippets/daniel_website_security.conf;
 
     # ── Next.js Server Actions — stricter rate limit ───────────────
     # Next.js uses POST /_next/data or the Next-Action header,
@@ -351,7 +351,7 @@ server {
 ```
 
 ```bash
-sudo ln -sf /etc/nginx/sites-available/robera_website /etc/nginx/sites-enabled/robera_website
+sudo ln -sf /etc/nginx/sites-available/daniel_website /etc/nginx/sites-enabled/daniel_website
 sudo nginx -t && sudo systemctl reload nginx
 ```
 

@@ -1,0 +1,312 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [master, staging]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - run: npm install
+      - run: npm test
+      - run: npm run build
+
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    outputs:
+      image: ${{ steps.image.outputs.image }}
+      sha: ${{ steps.sha.outputs.sha }}
+      version: ${{ steps.version.outputs.version }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # ensures full history is fetched
+          tags: true
+
+      - name: Ensure latest tags are fetched
+        run: |
+          git fetch --all --tags --prune
+
+      - name: Create GitHub Release
+        if: github.ref == 'refs/heads/staging'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          name: Release v1.0.${{ github.run_number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get version from latest tag
+        id: version
+        run: |
+          VERSION=$(git tag --sort=-v:refname | head -n 1 || true)
+          if [ -z "$VERSION" ]; then
+            VERSION="v0.0.${{ github.run_number }}"
+          fi
+          echo "Detected version: $VERSION"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Derive lowercase image path
+        id: repo
+        run: |
+          echo "lowercase=${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
+      - name: Short SHA
+        id: sha
+        run: |
+          echo "sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Set Docker tags
+        id: docker_tags
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          if [ -z "$VERSION" ]; then
+            VERSION="v0.0.${{ github.run_number }}"
+          fi
+          SHA_TAG="${{ github.sha }}"
+          REG_PATH="${{ env.REGISTRY }}/${{ steps.repo.outputs.lowercase }}"
+
+          TAGS="${REG_PATH}:${VERSION},\
+          ${REG_PATH}:${VERSION}_${SHA_TAG},\
+          ${REG_PATH}:${SHA_TAG},\
+          ${REG_PATH}:latest"
+
+          echo "tags=$TAGS" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.docker_tags.outputs.tags }}
+          build-args: |
+            NEXT_SERVER_ACTIONS_ENCRYPTION_KEY=${{ secrets.NEXT_SERVER_ACTIONS_ENCRYPTION_KEY }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Output image reference
+        id: image
+        run: |
+          echo "image=${{ env.REGISTRY }}/${{ steps.repo.outputs.lowercase }}:${{ steps.version.outputs.version }}" >> $GITHUB_OUTPUT
+
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Test connectivity to server
+        run: |
+          HOST="${{ secrets.DO_HOST }}"
+          PORT="${{ secrets.DO_PORT || 22 }}"
+
+          echo "Testing connectivity to $HOST:$PORT..."
+
+          # Try to connect with timeout
+          if timeout 30 nc -zv "$HOST" "$PORT" 2>/dev/null; then
+            echo "✓ Server is reachable"
+          else
+            echo "✗ Cannot reach server $HOST:$PORT"
+            echo "Possible issues:"
+            echo "- Server is down"
+            echo "- Firewall blocking connections"
+            echo "- IP address changed"
+            echo "- Port is incorrect"
+            exit 1
+          fi
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USERNAME }}
+          key: ${{ secrets.DO_SSH_KEY }}
+          port: ${{ secrets.DO_PORT || 22 }}
+          command_timeout: 20m
+          timeout: 600s
+          debug: true
+          script_stop: true
+          retry: 3
+          retry_interval: 30s
+
+          script: |
+            set -e
+
+            SITE_DIR="/var/www/daniel_website"
+            IMAGE="${{ needs.build.outputs.image }}"
+            SHA="${{ needs.build.outputs.sha }}"
+            APP_NAME="daniel_website"
+            HOST_PORT="4719"
+
+            echo "======================================"
+            echo "Deploying $APP_NAME — sha: $SHA"
+            echo "Image: $IMAGE"
+            echo "======================================"
+
+            mkdir -p "$SITE_DIR/logs"
+
+            # 1) Write docker-compose.yml with the new image (FORCE update)
+            cat > "$SITE_DIR/docker-compose.yml" << EOF
+            services:
+              app:
+                image: $IMAGE
+                container_name: $APP_NAME
+                restart: unless-stopped
+                ports:
+                  - "${HOST_PORT}:3000"
+                env_file:
+                  - .env
+                networks:
+                  - daniel_website-net
+                  - shared-net
+                deploy:
+                  resources:
+                    limits:
+                      memory: 512m
+                      cpus: '0.5'
+                healthcheck:
+                  test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/en',r=>process.exit(r.statusCode<500?0:1))"]
+                  interval: 120s
+                  timeout: 5s
+                  start_period: 30s
+                  retries: 3
+
+            networks:
+              daniel_website-net:
+                name: daniel_website-net
+                driver: bridge
+              shared-net:
+                external: true
+            EOF
+
+            # 2) Confirm the file was updated (timestamp + content)
+            echo "=== File metadata ==="
+            ls -l "$SITE_DIR/docker-compose.yml"
+            echo "=== Image in file ==="
+            grep "image" "$SITE_DIR/docker-compose.yml"
+
+            # 3) Log in and pull the new image
+            echo "=== Logging in to GHCR ==="
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+            echo "=== Pulling new image ==="
+            docker pull $IMAGE
+
+            # 4) Remove old container (force fresh start)
+            echo "=== Removing old container ==="
+            docker rm -f daniel_website || true
+
+            # 5) Start container from new image
+            echo "=== Starting container ==="
+            cd "$SITE_DIR"
+            docker compose up -d --no-deps app
+
+            # 6) Verify container is running
+            echo "=== Verifying container ==="
+            sleep 20
+            if ! docker ps --format '{{.Names}}' | grep -q "^daniel_website$"; then
+              echo "Container failed to start"
+              docker logs daniel_website --tail 50
+              exit 1
+            fi
+
+            # 7) Wait for health check
+            echo "=== Waiting for health check ==="
+            RETRIES=20
+            COUNT=0
+            until docker inspect --format='{{.State.Health.Status}}' daniel_website | grep -q "healthy"; do
+              COUNT=$((COUNT + 1))
+              if [ $COUNT -ge $RETRIES ]; then
+                echo "Health check timed out"
+                docker logs daniel_website --tail 50
+                exit 1
+              fi
+              echo "Waiting... ($COUNT/$RETRIES)"
+              sleep 6
+            done
+
+            echo "=== Container healthy ==="
+            docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" | grep -E "daniel_website" || true
+
+            echo "======================================"
+            echo "Deployment complete — sha: $SHA"
+            echo "======================================"
+
+
+  healthcheck:
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Verify app on server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USERNAME }}
+          key: ${{ secrets.DO_SSH_KEY }}
+          port: ${{ secrets.DO_PORT || 22 }}
+          command_timeout: 5m
+          script_stop: true
+          script: |
+            set -e
+
+            DOMAIN="${{ secrets.DOMAIN }}"
+            URL="http://127.0.0.1:4719/en"
+
+            echo "Checking $URL on server..."
+
+            for i in 1 2 3 4 5 6 7 8; do
+              echo "Attempt $i/8..."
+
+              CODE=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 10 "$URL" || echo "000")
+              if [ "$CODE" -ge 200 ] && [ "$CODE" -lt 500 ]; then
+                echo "App is up on localhost:4719 (HTTP $CODE)"
+                docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" | grep -E "daniel_website" || true
+                exit 0
+              fi
+
+              echo "Got HTTP $CODE — retrying in 15s..."
+              sleep 15
+            done
+
+            echo "Health check failed for $URL"
+            echo "Container logs:"
+            docker logs daniel_website --tail 50 || true
+            echo "NGINX tip: sudo tail -f /var/log/nginx/daniel_website.error.log"
+            echo "Public tip: curl -I http://$DOMAIN"
+            exit 1

@@ -1,7 +1,7 @@
 export const SITE = {
   name: 'Daniel Assefa Practicing Architecture',
 
-  origin: 'https://danielassefa.com',
+  origin: 'https://danielassefa.org',
   basePathname: '/',
   trailingSlash: false,
 

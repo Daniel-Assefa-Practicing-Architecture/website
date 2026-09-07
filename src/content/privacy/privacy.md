@@ -9,7 +9,7 @@ This Privacy Policy describes how Daniel Assefa Practicing Architecture ("the Co
 - **Company** refers to Daniel Assefa Practicing Architecture, Addis Ababa, Ethiopia.
 - **Country** refers to Ethiopia.
 - **Service** refers to this Website.
-- **Website** refers to the Daniel Assefa Practicing Architecture site at [https://danielassefa.com](https://danielassefa.com).
+- **Website** refers to the Daniel Assefa Practicing Architecture site at [https://danielassefa.org](https://danielassefa.org).
 - **You** means the individual or organization accessing the Service.
 - **Personal Data** means information that relates to an identified or identifiable individual.
 - **Usage Data** means data collected automatically from use of the Service (for example, pages visited or approximate location derived from an IP address).

@@ -107,7 +107,7 @@ URL=https://danielassefa.org
 
 **2. Create the NGINX virtual host config:**
 
-### Dont forget to change the port and add github secrets!
+### Dont forget to change the port and add github secrets! add dockerfile too
 
 ```bash
 sudo nano /etc/nginx/sites-available/daniel_website

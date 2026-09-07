@@ -4,6 +4,7 @@ import { SITE } from './src/config.js';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  output: 'standalone',
   trailingSlash: SITE.trailingSlash,
   basePath: SITE.basePathname !== '/' ? SITE.basePathname : '',
   poweredByHeader: false,

@@ -18,7 +18,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <Headline
           header={{
             tagline: pick(locale, 'Selected work', amCopy.portfolioTag),
-            title: pick(locale, 'Daniel Assefa Practicing Architecture', amCopy.portfolioTitle),
+            title: pick(locale, 'Daniel Assefa Building Consultant', amCopy.portfolioTitle),
             subtitle: pick(
               locale,
               'Housing, churches, hospitals, schools, and civic work across Ethiopia.',

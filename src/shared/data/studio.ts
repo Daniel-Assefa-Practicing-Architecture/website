@@ -1,6 +1,22 @@
 /** Studio contact + map (Bole Michael / ring road, Addis Ababa). */
-export const STUDIO_PHONE_DISPLAY = '+251 910 202 958';
-export const STUDIO_PHONE_TEL = 'tel:+251910202958';
+export const STUDIO_PHONE_PRIMARY = '+251 911 234 812';
+export const STUDIO_PHONE_PRIMARY_TEL = 'tel:+251911234812';
+
+export const STUDIO_PHONE_SECONDARY = '+251 910 202 958';
+export const STUDIO_PHONE_SECONDARY_TEL = 'tel:+251910202958';
+
+/** Both numbers, for inline copy and lists. */
+export const STUDIO_PHONES = [STUDIO_PHONE_PRIMARY, STUDIO_PHONE_SECONDARY] as const;
+
+export const STUDIO_PHONE_DISPLAY = `${STUDIO_PHONE_PRIMARY} or ${STUDIO_PHONE_SECONDARY}`;
+export const STUDIO_PHONE_DISPLAY_AM = `${STUDIO_PHONE_PRIMARY} ወይም ${STUDIO_PHONE_SECONDARY}`;
+
+/** Shared “how to start” FAQ copy (primary number listed first). */
+export const STUDIO_FAQ_START_EN = `Write to danassgebbal12@gmail.com or call ${STUDIO_PHONE_DISPLAY}. A short brief and site notes are enough to begin.`;
+export const STUDIO_FAQ_START_AM = `ወደ danassgebbal12@gmail.com ይጻፉ ወይም ${STUDIO_PHONE_DISPLAY_AM} ይደውሉ። አጭር ብሪፍ እና የጣቢያ ማስታወሻ በቂ ነው።`;
+
+/** Default click-to-call target (first listed number). */
+export const STUDIO_PHONE_TEL = STUDIO_PHONE_PRIMARY_TEL;
 
 export const STUDIO_ADDRESS_EN =
   'Near Bole Michael Church, in front of the ring road, Addis Ababa, Ethiopia';

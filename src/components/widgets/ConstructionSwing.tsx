@@ -25,7 +25,7 @@ const ConstructionSwing = () => {
     <div
       className="construction-swing"
       role="img"
-      aria-label="Daniel Assefa Practicing Architecture, construction site illustration"
+      aria-label="Daniel Assefa Building Consultant, construction site illustration"
       dangerouslySetInnerHTML={{
         __html: `<div class="container">${svg}</div>`,
       }}

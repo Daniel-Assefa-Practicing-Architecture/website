@@ -9,7 +9,7 @@ tags: [architecture, churches, addis-ababa, ethiopia]
 
 Completed in 2005, the expansion of **Bole Medhanealem Church** in Addis Ababa asked the studio to grow a beloved sanctuary without interrupting the life already gathered inside it.
 
-Daniel Assefa Practicing Architecture blended Ethiopian Orthodox architectural language with discreet modern upgrades: extending the main prayer hall, adding rooms for community gatherings, and strengthening the structure for daily use. Natural stone masonry and careful iconography kept the spiritual identity intact, while improved lighting and ventilation made long services more generous.
+Daniel Assefa Building Consultant blended Ethiopian Orthodox architectural language with discreet modern upgrades: extending the main prayer hall, adding rooms for community gatherings, and strengthening the structure for daily use. Natural stone masonry and careful iconography kept the spiritual identity intact, while improved lighting and ventilation made long services more generous.
 
 The hardest constraint was continuity. Services continued through construction, so sequencing, temporary access, and protection of sacred artworks mattered as much as the final elevations.
 

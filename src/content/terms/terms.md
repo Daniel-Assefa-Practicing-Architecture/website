@@ -11,9 +11,9 @@ Please read these terms and conditions carefully before using this website.
 For the purposes of these Terms and Conditions:
 
 - **Country** refers to Ethiopia.
-- **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Daniel Assefa Practicing Architecture, Addis Ababa, Ethiopia.
+- **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Daniel Assefa Building Consultant, Addis Ababa, Ethiopia.
 - **Service** refers to this Website.
-- **Website** refers to the Daniel Assefa Practicing Architecture site, accessible from [https://danielassefa.org](https://danielassefa.org).
+- **Website** refers to the Daniel Assefa Building Consultant site, accessible from [https://danielassefa.org](https://danielassefa.org).
 - **You** means the individual accessing or using the Service, or the company or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.
 
 ## Acknowledgment
@@ -47,5 +47,5 @@ We may update these Terms from time to time. Continued use of the Service after 
 If you have any questions about these Terms and Conditions, contact us:
 
 - By email: [danassgebbal12@gmail.com](mailto:danassgebbal12@gmail.com)
-- By phone: +251 910 202 958
+- By phone: +251 911 234 812 or +251 910 202 958
 - Studio: Near Bole Michael Church, in front of the ring road, Addis Ababa, Ethiopia

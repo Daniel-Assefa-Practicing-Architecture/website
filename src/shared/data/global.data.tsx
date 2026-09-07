@@ -8,7 +8,7 @@ import { AnnouncementProps, FooterProps, HeaderProps } from '../types';
 export const announcementData: AnnouncementProps = {
   title: 'Practice',
   callToAction: {
-    text: 'Daniel Assefa Practicing Architecture, design and supervision across Ethiopia',
+    text: 'Daniel Assefa Building Consultant, design and supervision across Ethiopia',
     href: '/about',
   },
   callToAction2: {
@@ -49,7 +49,7 @@ export const headerData: HeaderProps = {
 };
 
 export const footerData: FooterProps = {
-  title: 'Daniel Assefa Practicing Architecture',
+  title: 'Daniel Assefa Building Consultant',
   links: [
     { label: 'Terms & Conditions', href: '/terms' },
     { label: 'Privacy Policy', href: '/privacy' },
@@ -81,6 +81,7 @@ export const footerData: FooterProps = {
     {
       title: 'Contact',
       links: [
+        { label: '+251 911 234 812', href: 'tel:+251911234812' },
         { label: '+251 910 202 958', href: 'tel:+251910202958' },
         { label: 'danassgebbal12@gmail.com', href: 'mailto:danassgebbal12@gmail.com' },
       ],
@@ -92,7 +93,7 @@ export const footerData: FooterProps = {
   ],
   footNote: (
     <div className="mr-4 text-sm">
-      Daniel Assefa Practicing Architecture. Buildings shaped by place, craft, and care.
+      Daniel Assefa Building Consultant. Buildings shaped by place, craft, and care.
     </div>
   ),
 };
@@ -105,11 +106,11 @@ export const footerData2: FooterProps = {
   columns: [
     {
       title: 'Studio',
-      texts: ['Near Bole Michael Church, Addis Ababa', 'Daniel Assefa Practicing Architecture'],
+      texts: ['Near Bole Michael Church, Addis Ababa', 'Daniel Assefa Building Consultant'],
     },
     {
       title: 'Phone',
-      texts: ['+251 910 202 958'],
+      texts: ['+251 911 234 812', '+251 910 202 958'],
     },
     {
       title: 'Email',
@@ -122,7 +123,7 @@ export const footerData2: FooterProps = {
   ],
   footNote: (
     <div className="mr-4 text-sm">
-      © {new Date().getFullYear()} Daniel Assefa Practicing Architecture
+      © {new Date().getFullYear()} Daniel Assefa Building Consultant
     </div>
   ),
 };

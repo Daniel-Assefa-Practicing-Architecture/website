@@ -1,11 +1,11 @@
 export const SITE = {
-  name: 'Daniel Assefa Practicing Architecture',
+  name: 'Daniel Assefa Building Consultant',
 
   origin: 'https://danielassefa.org',
   basePathname: '/',
   trailingSlash: false,
 
-  title: 'Daniel Assefa Practicing Architecture',
+  title: 'Daniel Assefa Building Consultant',
   description:
-    'Daniel Assefa Practicing Architecture designs and supervises durable buildings across Ethiopia, housing, churches, campuses, and civic work shaped by place and craft.',
+    'Daniel Assefa Building Consultant designs and supervises durable buildings across Ethiopia, housing, churches, campuses, and civic work shaped by place and craft.',
 };

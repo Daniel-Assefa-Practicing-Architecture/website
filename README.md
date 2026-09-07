@@ -1,4 +1,4 @@
-# Daniel Assefa Practicing Archtecure
+# Daniel Assefa Building Consultant
 
 Next.js, Tailwind, and English / Amharic via `next-intl`.
 
@@ -107,7 +107,7 @@ URL=https://danielassefa.org
 
 **2. Create the NGINX virtual host config:**
 
-### Dont forget to change the port and add github secrets! add dockerfile too
+### Dont forget to change the port and add github secrets! add dockerfile , next.config.js too
 
 ```bash
 sudo nano /etc/nginx/sites-available/daniel_website
@@ -153,6 +153,44 @@ The browser fails because it uses **HTTPS**, and Cloudflare HTTPS still returns 
 sudo nginx -t && sudo systemctl reload nginx
 curl -I -H 'Host: danielassefa.org' http://127.0.0.1/en
 ```
+
+Side note:
+
+It **is** working. That `301` is nginx forcing HTTP → HTTPS after Certbot.
+
+You hit `http://127.0.0.1/en`, and nginx replied:
+
+`Location: https://danielassefa.org/en`
+
+So plain HTTP is not meant to serve the app anymore.
+
+Use one of these instead:
+
+```
+# Test HTTPS locally (ignore cert hostname mismatch on 127.0.0.1)
+
+curl -Ik -H 'Host: danielassefa.org' https://127.0.0.1/en
+
+# Or hit the app container/port directly (from your README: 4720)
+
+curl -I http://127.0.0.1:4720/en
+
+# Or follow the public HTTPS URL
+
+curl -I https://danielassefa.org/en
+```
+
+You want `200` (or `308307` from Next locale routing), not `301` from the HTTP vhost.
+
+If `https://127.0.0.1/en` fails, check:
+
+1. App is up: `curl -I http://127.0.0.1:4720/en`
+
+2. Nginx error log: `sudo tail -50 /var/log/nginx/daniel_website.error.log`
+
+3. Container/service: `docker ps` (or however you run the site)
+
+
 
 **3. Issue TLS certificate:**
 
@@ -242,7 +280,7 @@ if ($host = "") {
 
 # ── Block wrong Host header (direct IP access, other domains) ──────
 # Only danielassefa.org and www.danielassefa.org should reach this server.
-if ($host !~* "^(robera\.net|www\.robera\.net)$") {
+if ($host !~* "^(danielassefa\.org|www\.danielassefa\.org)$") {
     return 444;
 }
 
@@ -278,7 +316,7 @@ sudo systemctl reload nginx
 ### Next step
 
 ```nginx
-sudo nano /etc/nginx/sites-available/daniel_website
+sudo vi /etc/nginx/sites-available/daniel_website
 ```
 
 then

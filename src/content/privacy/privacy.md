@@ -2,14 +2,14 @@
 
 _Last updated_: September 6, 2026
 
-This Privacy Policy describes how Daniel Assefa Practicing Architecture ("the Company", "We", "Us", or "Our") collects, uses, and shares information when You use this Website.
+This Privacy Policy describes how Daniel Assefa Building Consultant ("the Company", "We", "Us", or "Our") collects, uses, and shares information when You use this Website.
 
 ## Definitions
 
-- **Company** refers to Daniel Assefa Practicing Architecture, Addis Ababa, Ethiopia.
+- **Company** refers to Daniel Assefa Building Consultant, Addis Ababa, Ethiopia.
 - **Country** refers to Ethiopia.
 - **Service** refers to this Website.
-- **Website** refers to the Daniel Assefa Practicing Architecture site at [https://danielassefa.org](https://danielassefa.org).
+- **Website** refers to the Daniel Assefa Building Consultant site at [https://danielassefa.org](https://danielassefa.org).
 - **You** means the individual or organization accessing the Service.
 - **Personal Data** means information that relates to an identified or identifiable individual.
 - **Usage Data** means data collected automatically from use of the Service (for example, pages visited or approximate location derived from an IP address).
@@ -58,5 +58,5 @@ We may update this Privacy Policy from time to time. Changes are effective when 
 If you have questions about this Privacy Policy, contact us:
 
 - By email: [danassgebbal12@gmail.com](mailto:danassgebbal12@gmail.com)
-- By phone: +251 910 202 958
+- By phone: +251 911 234 812 or +251 910 202 958
 - Studio: Near Bole Michael Church, in front of the ring road, Addis Ababa, Ethiopia

@@ -13,7 +13,7 @@ import amCopy from '../copy-am.json';
 import { pick } from '../locale';
 import { mediaUrl } from '../media';
 import { getFeaturedProjects } from '../projects';
-import { STUDIO_ADDRESS_AM, STUDIO_ADDRESS_EN, STUDIO_MAP_EMBED, STUDIO_PHONE_DISPLAY } from '../studio';
+import { STUDIO_ADDRESS_AM, STUDIO_ADDRESS_EN, STUDIO_MAP_EMBED, STUDIO_FAQ_START_AM, STUDIO_FAQ_START_EN, STUDIO_PHONES } from '../studio';
 
 const logos = [
   { link: 'https://en.wikipedia.org/wiki/University_of_Gondar', src: mediaUrl('/images/logos/uo_gondar.png'), alt: 'University of Gondar' },
@@ -28,8 +28,8 @@ const ADDIS_MAP = STUDIO_MAP_EMBED;
 
 export function getHeroHome(locale = 'en'): HeroProps {
   return {
-    tagline: pick(locale, 'Architecture practice', amCopy.heroTag),
-    title: pick(locale, 'Daniel Assefa Practicing Architecture', amCopy.heroTitle),
+    tagline: pick(locale, 'Building consultant', amCopy.heroTag),
+    title: pick(locale, 'Daniel Assefa Building Consultant', amCopy.heroTitle),
     subtitle: pick(
       locale,
       'A design and construction practice creating durable buildings for communities across Ethiopia, from first sketch through supervision and handover.',
@@ -84,7 +84,7 @@ export function getContentHomeOne(locale = 'en'): ContentProps {
     },
     content: pick(
       locale,
-      'Daniel Assefa Practicing Architecture leads design from first idea to completed building. The studio brings more than ten years of residential, commercial, civic, and sacred work across Ethiopia, with a focus on careful construction, budgeting, and lasting craft.',
+      'Daniel Assefa Building Consultant leads design from first idea to completed building. The studio brings more than ten years of residential, commercial, civic, and sacred work across Ethiopia, with a focus on careful construction, budgeting, and lasting craft.',
       amCopy.aboutLead,
     ),
     items: [
@@ -127,7 +127,7 @@ export function getStepsHome(locale = 'en'): StepsProps {
       title: pick(locale, 'Education and practice', amCopy.stepsTitle),
       subtitle: pick(
         locale,
-        'From Addis Ababa University to leading the practice that became Daniel Assefa Practicing Architecture.',
+        'From Addis Ababa University to leading the practice that became Daniel Assefa Building Consultant.',
         amCopy.stepsSubtitle,
       ),
     },
@@ -150,10 +150,10 @@ export function getFaqs2Home(locale = 'en'): FAQsProps {
       title: pick(locale, 'Questions clients usually ask', amCopy.faqsTitle),
     },
     items: [
-      { title: pick(locale, 'Where is the studio?', amCopy.faqWhere), description: pick(locale, 'Daniel Assefa Practicing Architecture is near Bole Michael Church, in front of the ring road in Addis Ababa, Ethiopia, and works on projects across the country.', amCopy.faqWhereAns) },
+      { title: pick(locale, 'Where is the studio?', amCopy.faqWhere), description: pick(locale, 'Daniel Assefa Building Consultant is near Bole Michael Church, in front of the ring road in Addis Ababa, Ethiopia, and works on projects across the country.', amCopy.faqWhereAns) },
       { title: pick(locale, 'What kinds of buildings do you take on?', amCopy.faqTypes), description: pick(locale, 'Housing, churches, schools, hospitals, mixed-use, hotels, and civic buildings, from first sketch through supervision.', amCopy.faqTypesAns) },
       { title: pick(locale, 'Are you a registered practice?', amCopy.faqReg), description: pick(locale, 'Yes. Registered Architect and Professional Member of the Ethiopian Association of Architects, certified by the Ethiopian Engineering Council, and CPD accredited.', amCopy.faqRegAns) },
-      { title: pick(locale, 'How do we start a conversation?', amCopy.faqStart), description: pick(locale, `Write to danassgebbal12@gmail.com or call ${STUDIO_PHONE_DISPLAY}. A short brief and site notes are enough to begin.`, amCopy.faqStartAns) },
+      { title: pick(locale, 'How do we start a conversation?', amCopy.faqStart), description: pick(locale, STUDIO_FAQ_START_EN, STUDIO_FAQ_START_AM) },
     ],
   };
 }
@@ -169,7 +169,7 @@ export function getContactHome(locale = 'en'): ContactProps {
     content: pick(locale, 'Find the studio on the map, or reach us directly by phone or email.', amCopy.contactLead),
     items: [
       { title: pick(locale, 'Studio', amCopy.studio), description: [pick(locale, STUDIO_ADDRESS_EN, STUDIO_ADDRESS_AM)], icon: IconMapPin },
-      { title: pick(locale, 'Contact', amCopy.headerContact), description: [STUDIO_PHONE_DISPLAY, 'danassgebbal12@gmail.com'], icon: IconPhoneCall },
+      { title: pick(locale, 'Contact', amCopy.headerContact), description: [...STUDIO_PHONES, 'danassgebbal12@gmail.com'], icon: IconPhoneCall },
       { title: pick(locale, 'Hours', amCopy.hours), description: [pick(locale, 'By appointment', amCopy.hoursByAppt), pick(locale, 'Open to new commissions', amCopy.hoursOpen)], icon: IconClock },
     ],
     mapEmbedUrl: ADDIS_MAP,

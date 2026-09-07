@@ -17,4 +17,4 @@ What the practice still carries:
 2. Write notes that a contractor can act on before noon.
 3. Protect the budget without humiliating the craft.
 
-Daniel Assefa Practicing Architecture continues this work from Addis Ababa, Ethiopia, serving clients across the country who want that same temperament.
+Daniel Assefa Building Consultant continues this work from Addis Ababa, Ethiopia, serving clients across the country who want that same temperament.

@@ -1,6 +1,7 @@
 import { CallToActionProps, FAQsProps, FeaturesProps, HeroProps } from '~/shared/types';
 import amCopy from '../copy-am.json';
 import { pick } from '../locale';
+import { STUDIO_FAQ_START_AM, STUDIO_FAQ_START_EN } from '../studio';
 
 export function getHeroServices(locale = 'en'): HeroProps {
   return {
@@ -73,7 +74,7 @@ export function getFaqsServices(locale = 'en'): FAQsProps {
     items: [
       {
         title: pick(locale, 'Where is the studio?', amCopy.faqWhere),
-        description: pick(locale, 'Daniel Assefa Practicing Architecture is near Bole Michael Church, in front of the ring road in Addis Ababa, Ethiopia, and works on projects across the country.', amCopy.faqWhereAns),
+        description: pick(locale, 'Daniel Assefa Building Consultant is near Bole Michael Church, in front of the ring road in Addis Ababa, Ethiopia, and works on projects across the country.', amCopy.faqWhereAns),
       },
       {
         title: pick(locale, 'What kinds of buildings do you take on?', amCopy.faqTypes),
@@ -81,7 +82,7 @@ export function getFaqsServices(locale = 'en'): FAQsProps {
       },
       {
         title: pick(locale, 'How do we start a conversation?', amCopy.faqStart),
-        description: pick(locale, 'Write to danassgebbal12@gmail.com or call +251 910 202 958. A short brief and site notes are enough to begin.', amCopy.faqStartAns),
+        description: pick(locale, STUDIO_FAQ_START_EN, STUDIO_FAQ_START_AM),
       },
     ],
   };

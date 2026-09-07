@@ -5,7 +5,12 @@ import {
   STUDIO_ADDRESS_AM,
   STUDIO_ADDRESS_EN,
   STUDIO_PHONE_DISPLAY,
-  STUDIO_PHONE_TEL,
+  STUDIO_PHONE_DISPLAY_AM,
+  STUDIO_PHONE_PRIMARY,
+  STUDIO_PHONE_PRIMARY_TEL,
+  STUDIO_PHONE_SECONDARY,
+  STUDIO_PHONE_SECONDARY_TEL,
+  STUDIO_PHONES,
 } from '../studio';
 
 export function getHeroContact(locale = 'en'): HeroProps {
@@ -13,7 +18,7 @@ export function getHeroContact(locale = 'en'): HeroProps {
     title: pick(locale, 'Find the studio', amCopy.findStudio),
     subtitle: pick(
       locale,
-      'Daniel Assefa Practicing Architecture is based near Bole Michael Church in Addis Ababa, Ethiopia. Reach us by phone or email to begin a project conversation.',
+      'Daniel Assefa Building Consultant is based near Bole Michael Church in Addis Ababa, Ethiopia. Reach us by phone or email to begin a project conversation.',
       amCopy.contactHeroSubtitle,
     ),
     tagline: pick(locale, 'Contact', amCopy.contactTag),
@@ -32,7 +37,7 @@ export function getContactDetails(locale = 'en') {
     mapTitle: pick(locale, 'Map of the studio near Bole Michael Church', amCopy.mapIframeTitle),
     addressLines: [
       pick(locale, STUDIO_ADDRESS_EN, STUDIO_ADDRESS_AM),
-      `${pick(locale, 'Phone', amCopy.phoneLabel)}: ${STUDIO_PHONE_DISPLAY}`,
+      `${pick(locale, 'Phone', amCopy.phoneLabel)}: ${STUDIO_PHONES.join(' · ')}`,
       `${pick(locale, 'Email', amCopy.emailLabel)}: danassgebbal12@gmail.com`,
     ],
   };
@@ -60,10 +65,22 @@ export function getFeatures2Contact(locale = 'en'): FeaturesProps {
       },
       {
         title: pick(locale, 'Call', 'ይደውሉ'),
-        description: pick(locale, 'Speak with the practice about timelines and scope.', 'ስለ ጊዜ ሰሌዳ እና ስፋት ከልምዱ ጋር ይነጋገሩ።'),
+        description: pick(
+          locale,
+          `Speak with the practice about timelines and scope. ${STUDIO_PHONE_DISPLAY}.`,
+          `ስለ ጊዜ ሰሌዳ እና ስፋት ከልምዱ ጋር ይነጋገሩ። ${STUDIO_PHONE_DISPLAY_AM}።`,
+        ),
         callToAction: {
-          text: pick(locale, `Call ${STUDIO_PHONE_DISPLAY}`, amCopy.callStudio),
-          href: STUDIO_PHONE_TEL,
+          text: pick(locale, `Call ${STUDIO_PHONE_PRIMARY}`, `ይደውሉ ${STUDIO_PHONE_PRIMARY}`),
+          href: STUDIO_PHONE_PRIMARY_TEL,
+        },
+      },
+      {
+        title: pick(locale, 'Call', 'ይደውሉ'),
+        description: pick(locale, 'Alternate studio line.', 'ተለዋጭ የስቱዲዮ መስመር።'),
+        callToAction: {
+          text: pick(locale, `Call ${STUDIO_PHONE_SECONDARY}`, `ይደውሉ ${STUDIO_PHONE_SECONDARY}`),
+          href: STUDIO_PHONE_SECONDARY_TEL,
         },
       },
       {

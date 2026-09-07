@@ -24,13 +24,13 @@ import {
 import amCopy from '../copy-am.json';
 import { pick } from '../locale';
 import { mediaUrl } from '../media';
-import { STUDIO_ADDRESS_AM, STUDIO_ADDRESS_EN, STUDIO_MAP_EMBED, STUDIO_PHONE_DISPLAY } from '../studio';
+import { STUDIO_ADDRESS_AM, STUDIO_ADDRESS_EN, STUDIO_MAP_EMBED, STUDIO_FAQ_START_AM, STUDIO_FAQ_START_EN, STUDIO_PHONES } from '../studio';
 
 const ADDIS_MAP = STUDIO_MAP_EMBED;
 
 export function getHero2About(locale = 'en'): HeroProps {
   return {
-    title: pick(locale, 'Daniel Assefa Practicing Architecture', amCopy.aboutPageTitle),
+    title: pick(locale, 'Daniel Assefa Building Consultant', amCopy.aboutPageTitle),
     subtitle: pick(
       locale,
       'A design and construction practice creating sustainable, functional, and beautiful spaces for communities across Ethiopia.',
@@ -47,7 +47,7 @@ export function getHero2About(locale = 'en'): HeroProps {
     },
     image: {
       src: mediaUrl('/images/front-big.jpg'),
-      alt: pick(locale, 'Daniel Assefa Practicing Architecture', amCopy.aboutPageTitle),
+      alt: pick(locale, 'Daniel Assefa Building Consultant', amCopy.aboutPageTitle),
     },
   };
 }
@@ -157,7 +157,7 @@ export function getStepsAbout(locale = 'en'): StepsProps {
       },
       {
         title: pick(locale, 'Independent practice', 'ገለልተኛ ልምድ'),
-        description: pick(locale, 'Senior Architect and Manager, Daniel Assefa Building Consultant PLC, 1998-2024, now Daniel Assefa Practicing Architecture in Addis Ababa.', amCopy.step5Desc),
+        description: pick(locale, 'Senior Architect and Manager, Daniel Assefa Building Consultant PLC, 1998-2024, based in Addis Ababa.', amCopy.step5Desc),
         icon: IconNumber5,
       },
     ],
@@ -204,10 +204,10 @@ export function getFaqsAbout(locale = 'en'): FAQsProps {
       tagline: pick(locale, 'FAQs', amCopy.faqsTag),
     },
     items: [
-      { title: pick(locale, 'Where is the studio?', amCopy.faqWhere), description: pick(locale, 'Daniel Assefa Practicing Architecture is near Bole Michael Church, in front of the ring road in Addis Ababa, Ethiopia, and works on projects across the country.', amCopy.faqWhereAns) },
+      { title: pick(locale, 'Where is the studio?', amCopy.faqWhere), description: pick(locale, 'Daniel Assefa Building Consultant is near Bole Michael Church, in front of the ring road in Addis Ababa, Ethiopia, and works on projects across the country.', amCopy.faqWhereAns) },
       { title: pick(locale, 'What kinds of buildings do you take on?', amCopy.faqTypes), description: pick(locale, 'Housing, churches, schools, hospitals, mixed-use, hotels, and civic buildings, from first sketch through supervision.', amCopy.faqTypesAns) },
       { title: pick(locale, 'Are you a registered practice?', amCopy.faqReg), description: pick(locale, 'Yes. Registered Architect and Professional Member of the Ethiopian Association of Architects, certified by the Ethiopian Engineering Council, and CPD accredited.', amCopy.faqRegAns) },
-      { title: pick(locale, 'How do we start a conversation?', amCopy.faqStart), description: pick(locale, `Write to danassgebbal12@gmail.com or call ${STUDIO_PHONE_DISPLAY}. A short brief and site notes are enough to begin.`, amCopy.faqStartAns) },
+      { title: pick(locale, 'How do we start a conversation?', amCopy.faqStart), description: pick(locale, STUDIO_FAQ_START_EN, STUDIO_FAQ_START_AM) },
     ],
   };
 }
@@ -224,7 +224,7 @@ export function getContactAbout(locale = 'en'): ContactProps {
     content: pick(locale, 'Find the studio on the map, or reach us directly by phone or email.', amCopy.contactLead),
     items: [
       { title: pick(locale, 'Studio', amCopy.studio), description: [pick(locale, STUDIO_ADDRESS_EN, STUDIO_ADDRESS_AM)], icon: IconMapPin },
-      { title: pick(locale, 'Contact', amCopy.headerContact), description: [STUDIO_PHONE_DISPLAY, 'danassgebbal12@gmail.com'], icon: IconPhoneCall },
+      { title: pick(locale, 'Contact', amCopy.headerContact), description: [...STUDIO_PHONES, 'danassgebbal12@gmail.com'], icon: IconPhoneCall },
       { title: pick(locale, 'Hours', amCopy.hours), description: [pick(locale, 'By appointment', amCopy.hoursByAppt), pick(locale, 'Open to new commissions', amCopy.hoursOpen)], icon: IconClock },
     ],
     mapEmbedUrl: ADDIS_MAP,

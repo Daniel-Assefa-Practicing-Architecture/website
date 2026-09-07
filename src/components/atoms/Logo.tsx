@@ -4,7 +4,7 @@ const Logo = () => (
       Daniel Assefa
     </span>
     <span className="text-[0.65rem] font-medium uppercase tracking-[0.18em] text-primary-700 dark:text-primary-400">
-      Practicing Architecture
+      Building Consultant
     </span>
   </span>
 );

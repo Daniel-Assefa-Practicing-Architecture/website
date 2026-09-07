@@ -2,7 +2,7 @@ name: Build and deploy
 
 on:
   push:
-    branches: [master, staging]
+    branches: [main, staging]
   workflow_dispatch:
 
 permissions:
@@ -170,7 +170,7 @@ jobs:
             IMAGE="${{ needs.build.outputs.image }}"
             SHA="${{ needs.build.outputs.sha }}"
             APP_NAME="daniel_website"
-            HOST_PORT="4719"
+            HOST_PORT="4720"
 
             echo "======================================"
             echo "Deploying $APP_NAME — sha: $SHA"
@@ -286,7 +286,7 @@ jobs:
             set -e
 
             DOMAIN="${{ secrets.DOMAIN }}"
-            URL="http://127.0.0.1:4719/en"
+            URL="http://127.0.0.1:4720/en"
 
             echo "Checking $URL on server..."
 
@@ -295,7 +295,7 @@ jobs:
 
               CODE=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 10 "$URL" || echo "000")
               if [ "$CODE" -ge 200 ] && [ "$CODE" -lt 500 ]; then
-                echo "App is up on localhost:4719 (HTTP $CODE)"
+                echo "App is up on localhost:4720 (HTTP $CODE)"
                 docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" | grep -E "daniel_website" || true
                 exit 0
               fi

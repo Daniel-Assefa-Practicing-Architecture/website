@@ -121,7 +121,7 @@ server {
     error_log  /var/log/nginx/daniel_website.error.log;
 
     location / {
-        proxy_pass http://127.0.0.1:4719;
+        proxy_pass http://127.0.0.1:4720;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -172,7 +172,7 @@ server {
     error_log  /var/log/nginx/daniel_website.error.log;
 
     location / {
-        proxy_pass http://127.0.0.1:4719;
+        proxy_pass http://127.0.0.1:4720;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -291,7 +291,7 @@ server {
     return 301 https://$host$request_uri;
 }
 
-# 2) HTTPS — reverse proxy to Next.js on localhost:4719
+# 2) HTTPS — reverse proxy to Next.js on localhost:4720
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
@@ -331,7 +331,7 @@ server {
             # or CrowdSec. See note below.
         }
 
-        proxy_pass http://localhost:4719;
+        proxy_pass http://localhost:4720;
         proxy_http_version 1.1;
         proxy_set_header Upgrade    $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -343,7 +343,7 @@ server {
     
     location /_next/static/ {
 	limit_req zone=general burst=200 nodelay;
-	proxy_pass http://localhost:4719;
+	proxy_pass http://localhost:4720;
 	proxy_http_version 1.1;
 	proxy_set_header Host $host;
     }

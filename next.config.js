@@ -12,8 +12,8 @@ const nextConfig = {
   // In Next 16, 'experimental.ppr' is replaced by 'cacheComponents'
   cacheComponents: true,
 
-  // Site photos/logos load from S3 via mediaUrl(). Keep unoptimized to avoid
-  // /_next/image request storms that CrowdSec often treats as flooding.
+  // CrowdSec-safe: serve S3 URLs directly. Do NOT enable the Next image
+  // optimizer here — /_next/image request storms get treated as flooding.
   images: {
     unoptimized: true,
     qualities: [50, 75],

@@ -5,7 +5,7 @@ import { IconRss } from '@tabler/icons-react';
 import { useOnClickOutside } from '~/hooks/useOnClickOutside';
 import ToggleDarkMode from '~/components/atoms/ToggleDarkMode';
 import LanguageSelector from '~/components/atoms/LanguageSelector';
-import Link from 'next/link';
+import { Link } from '~/i18n/navigation';
 import Logo from '~/components/atoms/Logo';
 import ToggleMenu from '../atoms/ToggleMenu';
 import { headerData } from '~/shared/data/global.data';

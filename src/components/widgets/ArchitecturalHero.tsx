@@ -26,7 +26,14 @@ const ArchitecturalHero = ({
     if (!video) return;
 
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const syncMotion = () => {
+    let sourceAttached = false;
+
+    const attachAndPlay = () => {
+      if (!sourceAttached) {
+        video.src = videoSrc;
+        sourceAttached = true;
+        video.load();
+      }
       if (media.matches) {
         video.pause();
       } else {
@@ -36,9 +43,34 @@ const ArchitecturalHero = ({
       }
     };
 
-    syncMotion();
+    const syncMotion = () => {
+      if (!sourceAttached) return;
+      if (media.matches) {
+        video.pause();
+      } else {
+        void video.play().catch(() => undefined);
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (!entry) return;
+        if (entry.isIntersecting) {
+          attachAndPlay();
+        } else {
+          video.pause();
+        }
+      },
+      { rootMargin: '120px' },
+    );
+
+    observer.observe(video);
     media.addEventListener('change', syncMotion);
-    return () => media.removeEventListener('change', syncMotion);
+    return () => {
+      observer.disconnect();
+      media.removeEventListener('change', syncMotion);
+    };
   }, [videoSrc]);
 
   return (
@@ -46,15 +78,13 @@ const ArchitecturalHero = ({
       <video
         ref={videoRef}
         className="absolute inset-0 h-full w-full object-cover"
-        src={videoSrc}
         autoPlay
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="none"
         aria-hidden
       />
-      {/* Black tint over the footage */}
       <div className="pointer-events-none absolute inset-0 bg-black/55" aria-hidden />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/40" aria-hidden />
 

@@ -1,4 +1,5 @@
 import { Suspense, type ReactNode } from 'react';
+import { setRequestLocale } from 'next-intl/server';
 
 type LocaleParams = Promise<{ locale: string }>;
 
@@ -10,6 +11,7 @@ async function LocaleBody({
   children: (locale: string) => ReactNode;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   return <>{children(locale)}</>;
 }
 

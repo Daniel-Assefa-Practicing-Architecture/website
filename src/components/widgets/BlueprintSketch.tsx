@@ -1,15 +1,31 @@
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
+'use client';
 
-/** Blueprint sketch animation on tilted paper sheets (services hero visual). */
+import { useEffect, useState } from 'react';
+
+/** Fetch blueprint SVG after paint so services navigations stay light. */
 const BlueprintSketch = () => {
-  const svg = readFileSync(join(process.cwd(), 'public/images/services-blueprint.svg'), 'utf8');
+  const [svg, setSvg] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    void fetch('/images/services-blueprint.svg')
+      .then((res) => res.text())
+      .then((text) => {
+        if (!cancelled) setSvg(text);
+      })
+      .catch(() => {
+        /* Decorative */
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <div className="blueprint-sketch" aria-hidden="true">
       <div
-        className="blueprint-sketch__sheet"
-        dangerouslySetInnerHTML={{ __html: svg }}
+        className="blueprint-sketch__sheet min-h-[12rem]"
+        {...(svg ? { dangerouslySetInnerHTML: { __html: svg } } : {})}
       />
     </div>
   );

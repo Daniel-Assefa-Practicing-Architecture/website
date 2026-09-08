@@ -1,7 +1,9 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { Link } from '~/i18n/navigation';
 import { footerData2 } from '~/shared/data/global.data';
+import { STUDIO_PHONES } from '~/shared/data/studio';
 
 const Footer2 = () => {
   const t = useTranslations('Footer');
@@ -14,7 +16,7 @@ const Footer2 = () => {
     },
     {
       title: t('phone'),
-      texts: ['+251 911 234 812', '+251 910 202 958'],
+      texts: [...STUDIO_PHONES],
     },
     {
       title: t('email'),
@@ -23,8 +25,8 @@ const Footer2 = () => {
   ];
 
   const links = [
-    { label: t('terms'), href: '/terms' },
-    { label: t('privacy'), href: '/privacy' },
+    { label: t('terms'), href: '/terms' as const },
+    { label: t('privacy'), href: '/privacy' as const },
   ];
 
   return (
@@ -64,13 +66,13 @@ const Footer2 = () => {
         <ul className="mb-4 flex pl-2 rtl:pl-0 rtl:pr-2 md:order-1 md:mb-0">
           {links.map(({ label, href }, index) => (
             <li key={`item-link-${index}`}>
-              <a
+              <Link
                 className="duration-150 ease-in-out placeholder:transition hover:text-gray-700 hover:underline dark:text-gray-400"
                 aria-label={label}
                 href={href}
               >
                 {label}
-              </a>
+              </Link>
               {links.length - 1 !== index && <span className="mr-1 rtl:mr-0 rtl:ml-1"> · </span>}
             </li>
           ))}
